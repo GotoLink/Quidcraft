@@ -23,7 +23,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid="Quidcraft",name="Quidcraft",version="0.1")
-@NetworkMod(clientSideRequired=true,serverSideRequired=false)
+@NetworkMod(clientSideRequired=true,serverSideRequired=false,channels="Broom",packetHandler=QuidcraftPacketHandler.class)
 public class Quidcraft{
 	@Instance("Quidcraft")
 	public static Quidcraft instance;
@@ -36,6 +36,8 @@ public class Quidcraft{
 	public static int Quaffle_ID, Bludger_ID, Snitch_ID, Bat_ID,Broom_ID,BludgerGlove_ID,
 	SnitchGlove_ID,Jersey_ID,Headband_ID;
 	public static int BlockGoal_ID,QuidditchChest_ID,BoundaryFlag_ID,ScoreAreaFlag_ID;
+	public static final String[] jerseyNames = new String[] {"Jersey", "Red Jersey", "Orange Jersey", "Yellow Jersey", "Green Jersey", "Blue Jersey", "Purple Jersey"};
+	public static final String[] headbandNames=new String[]{"Headband","Beater Headband","Chaser Headband","Keeper Headband","Seeker Headband"};
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
@@ -121,28 +123,22 @@ public class Quidcraft{
 		/* Jerseys */
 		Jersey = (new ItemJersey(Jersey_ID, proxy.jerseySkin)).setItemName("Jersey").setIconIndex(9);
 				
-		LanguageRegistry.addName(Jersey, "Jersey");
 		GameRegistry.addRecipe(new ItemStack(Jersey, 1), new Object[] {
 				"c c","ccc","ccc", Character.valueOf('c'), Block.cloth});
-		/*LanguageRegistry.addName(JerseyRed, "Red Jersey");
-		LanguageRegistry.addName(JerseyOrange, "Orange Jersey");
-		LanguageRegistry.addName(JerseyYellow, "Yellow Jersey");
-		LanguageRegistry.addName(JerseyGreen, "Green Jersey");
-		LanguageRegistry.addName(JerseyBlue, "Blue Jersey");
-		LanguageRegistry.addName(JerseyPurple, "Purple Jersey");*/
-		
+		for (int index = 0; index < jerseyNames.length; index++) {
+			ItemStack jerseyStack = new ItemStack(Jersey, 1, index);
+			LanguageRegistry.addName(jerseyStack, jerseyNames[jerseyStack.getItemDamage()]);
+		}
 		/* Headbands */
 		Headband = (new ItemHeadband(Headband_ID,proxy.headbandSkin)).setItemName("Headband").setIconIndex(27);
 				
 		LanguageRegistry.addName(Headband, "Headband");
 		GameRegistry.addRecipe(new ItemStack(Headband, 1), new Object[] {
 				"ccc", Character.valueOf('c'), Block.cloth});
-		
-		/*LanguageRegistry.addName(HeadbandKeeper, "Keeper Headband");
-		LanguageRegistry.addName(HeadbandSeeker, "Seeker Headband");
-		LanguageRegistry.addName(HeadbandChaser, "Chaser Headband");
-		LanguageRegistry.addName(HeadbandBeater, "Beater Headband");*/
-		
+		for (int index = 0; index < headbandNames.length; index++) {
+			ItemStack headbandStack = new ItemStack(Headband, 1, index);
+			LanguageRegistry.addName(headbandStack, headbandNames[headbandStack.getItemDamage()]);
+		}
 		/* Goal Block */
 		BlockGoal = (new BlockGoal(BlockGoal_ID, 0)).setHardness(2.5F).setStepSound(Block.soundClothFootstep)
 				.setBlockName("BlockGoal");

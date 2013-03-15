@@ -55,7 +55,7 @@ public class ItemJersey extends ItemArmor implements IArmorTextureProvider{
      */
     public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
-        for (int var4 = 0; var4 < 7; ++var4)
+        for (int var4 = 0; var4 < jerseyNames.length; ++var4)
         {
             par3List.add(new ItemStack(par1, 1, var4));
         }
@@ -67,14 +67,14 @@ public class ItemJersey extends ItemArmor implements IArmorTextureProvider{
      */
     public int getIconFromDamage(int par1)
     {
-        int var2 = MathHelper.clamp_int(par1, 0, 6);
+        int var2 = MathHelper.clamp_int(par1, 0, jerseyNames.length-1);
         return this.iconIndex + var2;
     }
 
     public String getItemNameIS(ItemStack par1ItemStack)
     {
-        int var2 = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 6);
-        return super.getItemName()/*.concat( jerseyNames[var2])*/;
+        int var2 = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, jerseyNames.length-1);
+        return super.getItemName()+"."+jerseyNames[var2];
     }
 	@Override
 	public String getTextureFile(){
@@ -84,7 +84,7 @@ public class ItemJersey extends ItemArmor implements IArmorTextureProvider{
 
 	@Override
 	public String getArmorTextureFile(ItemStack itemStack) {
-		int var2 = MathHelper.clamp_int(itemStack.getItemDamage(), 0, 6);
+		int var2 = MathHelper.clamp_int(itemStack.getItemDamage(), 0, jerseyNames.length-1);
 		return "/armor/jersey"+jerseyNames[var2]+"_1.png";
 	}
 }
