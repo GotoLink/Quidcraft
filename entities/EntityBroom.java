@@ -185,16 +185,16 @@ public class EntityBroom extends EntityBoat
                   
             if(this.motionZ > maxZ && maxZ<0)
         		this.motionZ -= acc;
-        else if (this.motionZ < maxZ && maxZ>0)
+            else if (this.motionZ < maxZ && maxZ>0)
         		this.motionZ += acc;
-        else if(Math.abs(this.motionZ) > Math.abs(maxZ))
+            else if(Math.abs(this.motionZ) > Math.abs(maxZ))
         		this.motionZ = maxZ;
                  
           //move up if hitting wall
     		if(this.isCollidedHorizontally)
     			this.motionY += acc;
     		//move up/down		
-    		if( Math.abs(this.motionY) <= 0.5)
+    		if( Math.abs(this.motionY) <= 1.0D)
     		{	
     			if (isGoingUp)
     				this.motionY += acc;
@@ -209,7 +209,7 @@ public class EntityBroom extends EntityBoat
 					this.motionY -= acc;
 			}
 			//decrease y speed
-			/*if(motionY > 0 && !isGoingUp && !isGoingDown && !isCollidedHorizontally){
+			if(motionY > 0 && !isGoingUp && !isGoingDown && !isCollidedHorizontally){
 				motionY -= acc;
 				if(motionY < 0)
 					motionY = 0;
@@ -218,7 +218,7 @@ public class EntityBroom extends EntityBoat
 				motionY += acc;
 				if(motionY > 0)
 					motionY = 0;
-			}*/
+			}
         }
         else if(!this.onGround)
         {
@@ -232,6 +232,8 @@ public class EntityBroom extends EntityBoat
         	//slow down
         	this.motionX *= 0.5D;
         	this.motionZ *= 0.5D;
+        	this.motionY = 0.0D;
+        	this.isGoingDown = false;
         }
         
         this.moveEntity(this.motionX, this.motionY, this.motionZ);

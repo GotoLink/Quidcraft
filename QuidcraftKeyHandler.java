@@ -32,14 +32,20 @@ public class QuidcraftKeyHandler extends KeyHandler{
 				else if(kb.keyDescription=="Broom Down"){
 					Quidcraft.proxy.sendPacket(0,ent.riddenByEntity);
 				}
-				else 
-					Quidcraft.proxy.sendPacket(1,ent.riddenByEntity);
-				}
-    		}
+			}
 		}
+	}
 
 	@Override
 	public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd) {
+		Minecraft client = Minecraft.getMinecraft();
+		if (client!=null && client.thePlayer != null)
+		{
+			Entity ent=client.thePlayer.ridingEntity;
+			if (ent!=null && ent instanceof EntityBroom){
+				Quidcraft.proxy.sendPacket(1,ent.riddenByEntity);
+			}		
+		}
 	}
 
 	@Override
