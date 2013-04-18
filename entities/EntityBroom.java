@@ -52,6 +52,9 @@ public class EntityBroom extends EntityBoat
     {
         return 0;
     }
+	@Override
+	protected void updateFallState(double par1, boolean par3){  }
+	
     @Override
     public boolean attackEntityFrom(DamageSource damagesource, int i)
     {
@@ -155,13 +158,9 @@ public class EntityBroom extends EntityBoat
         {
         if( this.riddenByEntity != null)
         {
-        	double riderX = riddenByEntity.motionX;
-			double riderZ = riddenByEntity.motionZ;
-			
-			double acc = 0.05;
-			
-			double maxX = riderX*29.0D;
-			double maxZ = riderZ*29.0D;
+        	double acc = 0.05;	
+			double maxX = riddenByEntity.motionX*29.0D;
+			double maxZ = riddenByEntity.motionZ*29.0D;
 			
             //motionX += maxX * 0.060000000000000001D;
             //motionZ += maxZ * 0.060000000000000001D;
