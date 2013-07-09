@@ -1,8 +1,9 @@
-package mods.quidcraft.blocks;
+package assets.quidcraft.blocks;
 
 import java.util.Arrays;
 
-import mods.quidcraft.Quidcraft;
+import assets.quidcraft.Quidcraft;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;

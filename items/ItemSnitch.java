@@ -1,7 +1,7 @@
-package mods.quidcraft.items;
+package assets.quidcraft.items;
 
-import mods.quidcraft.Quidcraft;
-import mods.quidcraft.entities.EntitySnitch;
+import assets.quidcraft.Quidcraft;
+import assets.quidcraft.entities.EntitySnitch;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

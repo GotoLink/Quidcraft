@@ -1,8 +1,9 @@
-package mods.quidcraft.entities;
+package assets.quidcraft.entities;
 
 import java.util.List;
 
-import mods.quidcraft.Quidcraft;
+import assets.quidcraft.Quidcraft;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -56,7 +57,7 @@ public class EntityBroom extends EntityBoat
 	protected void updateFallState(double par1, boolean par3){  }
 	
     @Override
-    public boolean attackEntityFrom(DamageSource damagesource, int i)
+    public boolean attackEntityFrom(DamageSource damagesource, float i)
     {
     	if (this.isEntityInvulnerable())
         {

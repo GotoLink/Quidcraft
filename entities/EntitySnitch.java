@@ -1,8 +1,9 @@
-package mods.quidcraft.entities;
+package assets.quidcraft.entities;
 
 import java.util.List;
 
-import mods.quidcraft.Quidcraft;
+import assets.quidcraft.Quidcraft;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
@@ -22,14 +23,14 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
     {
         super(world);
         setSize(0.1F, 0.1F);
-        moveSpeed=0.25F;
+        //moveSpeed=0.25F;
     }
 	
 	public EntitySnitch(World world,EntityPlayer entityplayer)
     {
         this(world);
         setSize(0.1F, 0.1F);
-        moveSpeed=.25F;
+        //moveSpeed=.25F;
         
         setLocationAndAngles(entityplayer.posX, entityplayer.posY
 				+ (double) entityplayer.getEyeHeight(), entityplayer.posZ,
@@ -184,9 +185,9 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
 		double d2 = waypointZ - posZ;
 		double d3 = MathHelper.sqrt_double(d * d + d1 * d1 + d2 * d2);
 
-		motionX = (d / d3) * moveSpeed;
-		motionY = (d1 / d3) * moveSpeed;
-		motionZ = (d2 / d3) * moveSpeed;
+		motionX = (d / d3) * getMoveHelper().getSpeed();
+		motionY = (d1 / d3) * getMoveHelper().getSpeed();
+		motionZ = (d2 / d3) * getMoveHelper().getSpeed();
 
 		if (target == null) {
 			motionX = 0;
@@ -222,7 +223,7 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
     {
 		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
 		float distance = this.getDistanceToEntity(entityplayer);
-		System.out.println(distance);
+		//System.out.println(distance);
         if(distance <= 2.5F && itemstack != null && itemstack.itemID == Quidcraft.SnitchGlove.itemID)
         {
         	//entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, new ItemStack(mod_QuidditchSMP.Bludger));
@@ -297,9 +298,4 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
 	private double randomZ;
 	public float wingFlap=0F;
 	private boolean wingsUp=false;
-	@Override
-	public int getMaxHealth() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

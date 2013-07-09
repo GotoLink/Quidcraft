@@ -1,4 +1,4 @@
-package mods.quidcraft;
+package assets.quidcraft;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

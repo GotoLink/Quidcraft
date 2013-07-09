@@ -1,9 +1,10 @@
-package mods.quidcraft.items;
+package assets.quidcraft.items;
 
 import java.util.List;
 
-import mods.quidcraft.Quidcraft;
-import mods.quidcraft.entities.EntityBroom;
+import assets.quidcraft.Quidcraft;
+import assets.quidcraft.entities.EntityBroom;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -39,7 +40,7 @@ public class ItemBroom extends Item{
         float var20 = var14 * var16;
         double var21 = 5.0D;
         Vec3 var23 = var13.addVector((double)var18 * var21, (double)var17 * var21, (double)var20 * var21);
-        MovingObjectPosition var24 = world.rayTraceBlocks_do(var13, var23, true);
+        MovingObjectPosition var24 = world.clip(var13, var23, true);
 
         if (var24 == null)
         {
@@ -80,7 +81,7 @@ public class ItemBroom extends Item{
                     int var34 = var24.blockZ;
                     if (world.getBlockId(var29, var33, var34) == Block.snow.blockID)
                     {
-                            --var33;
+                        --var33;
                     }
                     EntityBroom var35 = new EntityBroom(world, (double)((float)var29 + 0.5F), (double)((float)var33 + 1.0F), (double)((float)var34 + 0.5F));
                     var35.rotationYaw = (float)(((MathHelper.floor_double((double)(entityplayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);

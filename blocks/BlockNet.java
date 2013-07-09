@@ -1,12 +1,13 @@
-package mods.quidcraft.blocks;
+package assets.quidcraft.blocks;
 
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import mods.quidcraft.Quidcraft;
-import mods.quidcraft.entities.EntityQuaffle;
-import mods.quidcraft.entities.TileEntityGoal;
+import assets.quidcraft.Quidcraft;
+import assets.quidcraft.entities.EntityQuaffle;
+import assets.quidcraft.entities.TileEntityGoal;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -45,15 +46,15 @@ public class BlockNet extends Block
     @SideOnly(Side.CLIENT)
     public Icon getIcon( int i, int j)
     {   
-         return this.icons[j==0?0:1];
+        return this.icons[j==0?0:1];
     }
-	 @SideOnly(Side.CLIENT)
-	    public void registerIcons(IconRegister par1IconRegister)
-	    {
-		 this.icons = new Icon[2];
-	     this.icons[0] = par1IconRegister.registerIcon("quidcraft:GoalBlock");
-	     this.icons[1] = par1IconRegister.registerIcon("quidcraft:GoalBlockScore");
-	    }
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister par1IconRegister)
+    {
+		this.icons = new Icon[2];
+	    this.icons[0] = par1IconRegister.registerIcon("quidcraft:GoalBlock");
+	    this.icons[1] = par1IconRegister.registerIcon("quidcraft:GoalBlockScore");
+    }
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
     {

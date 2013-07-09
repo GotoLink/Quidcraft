@@ -1,18 +1,18 @@
-package mods.quidcraft.renderers;
-import mods.quidcraft.entities.EntityQuaffle;
-import mods.quidcraft.models.ModelQuaffle;
+package assets.quidcraft.renderers;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 
 import org.lwjgl.opengl.GL11;
 
+import assets.quidcraft.entities.EntityQuaffle;
+import assets.quidcraft.models.ModelQuaffle;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderQuaffle extends Render
 {
-
     public RenderQuaffle(ModelQuaffle model, float f)
     {
     	this.shadowSize = f;
@@ -27,7 +27,8 @@ public class RenderQuaffle extends Render
     	GL11.glPushMatrix();
         GL11.glTranslatef((float)d, (float)d1, (float)d2);
         GL11.glRotatef((-1)*yaw, 0.0F, 1.0F, 0.0F);
-        loadTexture("/mods/quidcraft/textures/models/QuaffleSkin.png");
+        //loadTexture("/mods/quidcraft/textures/models/QuaffleSkin.png");
+        func_110777_b(entityquaffle);
         GL11.glScalef(-1F, -1F, 1.0F);
         modelQuaffle.render(entityquaffle, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
@@ -40,4 +41,9 @@ public class RenderQuaffle extends Render
     }
 
     protected ModelBase modelQuaffle;
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		return new ResourceLocation("quidcraft","/textures/models/QuaffleSkin.png");
+	}
 }

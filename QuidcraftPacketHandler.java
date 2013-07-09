@@ -1,10 +1,11 @@
-package mods.quidcraft;
+package assets.quidcraft;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import mods.quidcraft.entities.EntityBroom;
+import assets.quidcraft.entities.EntityBroom;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;

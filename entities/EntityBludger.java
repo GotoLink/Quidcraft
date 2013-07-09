@@ -1,11 +1,13 @@
-package mods.quidcraft.entities;
+package assets.quidcraft.entities;
 
 import java.util.List;
 
-import mods.quidcraft.Quidcraft;
+import assets.quidcraft.Quidcraft;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -34,7 +36,7 @@ public class EntityBludger extends EntityFlying implements IMob {
 		target = null;
 		setSize(0.4F, 0.4F);
 		isImmuneToFire = true;
-		moveSpeed = 0.6F;
+		//moveSpeed = 0.6F;
 	}
 
 	public EntityBludger(World world, EntityPlayer entityplayer) {
@@ -61,7 +63,14 @@ public class EntityBludger extends EntityFlying implements IMob {
         prevPosZ = posZ;
     }
 	@Override
-	public boolean attackEntityFrom(DamageSource damagesource, int i) {
+	protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.6D);
+    }
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource damagesource, float i) {
 		attacker = damagesource.getEntity();
 		if (attacker != null) {
 			if (attacker instanceof EntityPlayer) {
@@ -198,9 +207,9 @@ public class EntityBludger extends EntityFlying implements IMob {
 		double d2 = waypointZ - posZ;
 		double d3 = MathHelper.sqrt_double(d * d + d1 * d1 + d2 * d2);
 
-		motionX = (d / d3) * moveSpeed;
-		motionY = (d1 / d3) * moveSpeed;
-		motionZ = (d2 / d3) * moveSpeed;
+		motionX = (d / d3) * getMoveHelper().getSpeed();
+		motionY = (d1 / d3) * getMoveHelper().getSpeed();
+		motionZ = (d2 / d3) * getMoveHelper().getSpeed();
 
 		// moveEntity(motionX,motionY,motionZ);
 	}

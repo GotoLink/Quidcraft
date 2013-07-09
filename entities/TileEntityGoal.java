@@ -1,6 +1,6 @@
-package mods.quidcraft.entities;
+package assets.quidcraft.entities;
 
-import mods.quidcraft.blocks.BlockGoal;
+import assets.quidcraft.blocks.BlockGoal;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 

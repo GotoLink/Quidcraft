@@ -1,8 +1,9 @@
-package mods.quidcraft;
+package assets.quidcraft;
 
 import java.util.EnumSet;
 
-import mods.quidcraft.entities.EntityBroom;
+import assets.quidcraft.entities.EntityBroom;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;

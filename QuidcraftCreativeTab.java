@@ -1,4 +1,4 @@
-package mods.quidcraft;
+package assets.quidcraft;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.StringTranslate;
@@ -11,11 +11,7 @@ public class QuidcraftCreativeTab extends CreativeTabs{
 	{
 		super(label);
 	}
-	@SideOnly(Side.CLIENT)
-    public String getTranslatedTabLabel()
-    {
-        return StringTranslate.getInstance().translateKey(this.getTabLabel());
-    }
+	
 	@SideOnly(Side.CLIENT)
     public int getTabIconItemIndex()
     {

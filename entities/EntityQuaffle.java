@@ -1,9 +1,9 @@
-package mods.quidcraft.entities;
+package assets.quidcraft.entities;
 
-import mods.quidcraft.Quidcraft;
+import assets.quidcraft.Quidcraft;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,7 +21,7 @@ public class EntityQuaffle extends Entity
         bounceFactor = 0.4;
         stopped = false;
     }
-    public EntityQuaffle(World world, EntityLiving entity)
+    public EntityQuaffle(World world, EntityLivingBase entity)
     {
         this(world);
         double x = entity.posX;

@@ -1,6 +1,6 @@
-package mods.quidcraft.items;
+package assets.quidcraft.items;
 
-import mods.quidcraft.Quidcraft;
+import assets.quidcraft.Quidcraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

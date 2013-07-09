@@ -1,18 +1,18 @@
-package mods.quidcraft.renderers;
-import mods.quidcraft.entities.EntityBludger;
-import mods.quidcraft.models.ModelBludger;
+package assets.quidcraft.renderers;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 
 import org.lwjgl.opengl.GL11;
 
+import assets.quidcraft.entities.EntityBludger;
+import assets.quidcraft.models.ModelBludger;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderBludger extends Render
 {
-
     public RenderBludger(ModelBludger model, float f)
     {
     	this.shadowSize =f;
@@ -31,7 +31,8 @@ public class RenderBludger extends Render
         GL11.glRotatef(yaw, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(pitch, 0.0F, 0.0F, 1.0F);
         
-        loadTexture("/mods/quidcraft/textures/models/BludgerSkin.png");
+        //loadTexture("/mods/quidcraft/textures/models/BludgerSkin.png");
+        func_110777_b(entitybludger);
         GL11.glScalef(-1F, -1F, 1.0F);
         modelBludger.render(entitybludger, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
@@ -44,4 +45,9 @@ public class RenderBludger extends Render
     }
     
     protected ModelBase modelBludger;
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		return new ResourceLocation("quidcraft","/textures/models/BludgerSkin.png");
+	}
 }

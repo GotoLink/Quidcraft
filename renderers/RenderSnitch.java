@@ -1,17 +1,19 @@
-package mods.quidcraft.renderers;
+package assets.quidcraft.renderers;
 
-import mods.quidcraft.entities.EntitySnitch;
-import mods.quidcraft.models.ModelSnitch;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 
 import org.lwjgl.opengl.GL11;
 
+import assets.quidcraft.entities.EntitySnitch;
+import assets.quidcraft.models.ModelSnitch;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderSnitch extends Render {
-	
+
+	protected ModelSnitch modelSnitch;
 	public RenderSnitch(ModelSnitch model, float f) {
 		this.shadowSize =f;
 		this.modelSnitch = model;
@@ -28,7 +30,8 @@ public class RenderSnitch extends Render {
 	    GL11.glRotatef(yaw, 0.0F, 1.0F, 0.0F);
 	    GL11.glRotatef(pitch, 0.0F, 0.0F, 1.0F);
 		
-		loadTexture("/mods/quidcraft/textures/models/SnitchSkin.png");
+		//loadTexture("/mods/quidcraft/textures/models/SnitchSkin.png");
+	    func_110777_b(entitysnitch);
 		GL11.glScalef(-1F, -1F, 1.0F);
 		modelSnitch.flap(entitysnitch.wingFlap);
 		modelSnitch.render(entitysnitch, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
@@ -40,5 +43,8 @@ public class RenderSnitch extends Render {
 		renderNew((EntitySnitch) entity, d, d1, d2, f, f1);
 	}
 
-	protected ModelSnitch modelSnitch;
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		return new ResourceLocation("quidcraft","/textures/models/SnitchSkin.png");
+	}
 }

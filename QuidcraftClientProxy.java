@@ -1,17 +1,17 @@
-package mods.quidcraft;
+package assets.quidcraft;
 
-import mods.quidcraft.entities.EntityBludger;
-import mods.quidcraft.entities.EntityBroom;
-import mods.quidcraft.entities.EntityQuaffle;
-import mods.quidcraft.entities.EntitySnitch;
-import mods.quidcraft.models.ModelBludger;
-import mods.quidcraft.models.ModelBroom;
-import mods.quidcraft.models.ModelQuaffle;
-import mods.quidcraft.models.ModelSnitch;
-import mods.quidcraft.renderers.RenderBludger;
-import mods.quidcraft.renderers.RenderBroom;
-import mods.quidcraft.renderers.RenderQuaffle;
-import mods.quidcraft.renderers.RenderSnitch;
+import assets.quidcraft.entities.EntityBludger;
+import assets.quidcraft.entities.EntityBroom;
+import assets.quidcraft.entities.EntityQuaffle;
+import assets.quidcraft.entities.EntitySnitch;
+import assets.quidcraft.models.ModelBludger;
+import assets.quidcraft.models.ModelBroom;
+import assets.quidcraft.models.ModelQuaffle;
+import assets.quidcraft.models.ModelSnitch;
+import assets.quidcraft.renderers.RenderBludger;
+import assets.quidcraft.renderers.RenderBroom;
+import assets.quidcraft.renderers.RenderQuaffle;
+import assets.quidcraft.renderers.RenderSnitch;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 

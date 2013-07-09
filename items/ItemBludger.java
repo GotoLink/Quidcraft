@@ -1,7 +1,7 @@
-package mods.quidcraft.items;
+package assets.quidcraft.items;
 
-import mods.quidcraft.Quidcraft;
-import mods.quidcraft.entities.EntityBludger;
+import assets.quidcraft.Quidcraft;
+import assets.quidcraft.entities.EntityBludger;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

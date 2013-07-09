@@ -1,10 +1,7 @@
-package mods.quidcraft.blocks;
+package assets.quidcraft.blocks;
 
 import java.util.Random;
 
-import mods.quidcraft.Quidcraft;
-import mods.quidcraft.entities.EntityQuaffle;
-import mods.quidcraft.entities.TileEntityGoal;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -15,6 +12,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import assets.quidcraft.Quidcraft;
+import assets.quidcraft.entities.EntityQuaffle;
+import assets.quidcraft.entities.TileEntityGoal;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -27,30 +27,30 @@ public class BlockGoal extends BlockContainer//Breakable
         super(i, Material.portal);
         this.setCreativeTab(CreativeTabs.creativeTabArray[Quidcraft.proxy.tabQuidditch]);
     }
-	 @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
     public Icon getIcon(int i, int j)
     {   
          return this.icons[j==0?0:1];
     }
-	 @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
 		 this.icons = new Icon[2];
 	     this.icons[0] = par1IconRegister.registerIcon("quidcraft:GoalBlock");
 	     this.icons[1] = par1IconRegister.registerIcon("quidcraft:GoalBlockScore");
     }
-@Override
+	@Override
     public int idDropped(int i, Random random, int j)
     {
         return Quidcraft.BlockGoal.blockID;
     }
     
-@Override
+	@Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
     {
         return null;
     }
-@Override
+	@Override
     public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i, int j, int k)
     {
     	boolean flag = isBlockAt(iblockaccess, i, j, k - 1);
@@ -101,18 +101,18 @@ public class BlockGoal extends BlockContainer//Breakable
         }
         return false;
     }
-@Override
+    @Override
     public boolean isOpaqueCube()
     {
         return false;
     }
-@Override
+    @Override
     public boolean renderAsNormalBlock()
     {
         return false;
     }
 
-@Override
+    @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
     	//System.out.println("neighbor updated "+i+" "+j+" "+k);
@@ -303,7 +303,7 @@ public class BlockGoal extends BlockContainer//Breakable
 			}
         }
     }
-@SideOnly(Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         if(iblockaccess.getBlockId(i, j, k) != 0)
@@ -331,12 +331,12 @@ public class BlockGoal extends BlockContainer//Breakable
         return flag5 && l == 3;*/
         return true;
     }
-@Override
+    @Override
     public int quantityDropped(Random random)
     {
         return 1;
     }
-@SideOnly(Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public int getRenderBlockPass()
     {
         return 0;
@@ -356,7 +356,7 @@ public class BlockGoal extends BlockContainer//Breakable
     	}
     	
     }
-@Override
+    @Override
     public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
     {
     	if(!world.isRemote){
