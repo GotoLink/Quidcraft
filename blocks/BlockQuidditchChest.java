@@ -35,10 +35,6 @@ public class BlockQuidditchChest extends Block{
 		this.icons[1] = par1IconRegister.registerIcon("quidcraft:ChestSide");
     }
 	@Override
-	public void onBlockClicked(World world, int i, int j, int k, EntityPlayer entityplayer)
-    {
-    }
-	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int f, float f1,float f2,float f3)
     {
 		if (world.isRemote)

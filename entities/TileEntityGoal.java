@@ -13,7 +13,7 @@ public class TileEntityGoal extends TileEntity{
         hasQuaffle = false;
         justLostQuaffle = false;
     }
-	
+	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
     {
         super.readFromNBT(nbttagcompound);
@@ -26,7 +26,7 @@ public class TileEntityGoal extends TileEntity{
         neighborY = nbttagcompound.getShort("NeighborY");
         neighborZ = nbttagcompound.getShort("NeighborZ");
     }
-	
+	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
     {
         super.writeToNBT(nbttagcompound);
@@ -93,14 +93,6 @@ public class TileEntityGoal extends TileEntity{
 		neighborY = j;
 		neighborZ = k;
 	}
-	
-	public void openChest()
-    {
-    }
-
-    public void closeChest()
-    {
-    }
 
     public boolean hasQuaffle;
     public boolean justLostQuaffle;
