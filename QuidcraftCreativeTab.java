@@ -11,7 +11,13 @@ public class QuidcraftCreativeTab extends CreativeTabs{
 	{
 		super(label);
 	}
-	
+	@SideOnly(Side.CLIENT)
+	@Override
+    public String getTranslatedTabLabel()
+    {
+		return this.getTabLabel();
+    }
+	@Override
 	@SideOnly(Side.CLIENT)
     public int getTabIconItemIndex()
     {
