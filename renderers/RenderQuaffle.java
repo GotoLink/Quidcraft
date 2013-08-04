@@ -1,8 +1,8 @@
 package assets.quidcraft.renderers;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -41,9 +41,10 @@ public class RenderQuaffle extends Render
     }
 
     protected ModelBase modelQuaffle;
+    private final static ResourceLocation quaffle = new ResourceLocation("quidcraft","textures/models/QuaffleSkin.png");
 
 	@Override
 	protected ResourceLocation func_110775_a(Entity entity) {
-		return new ResourceLocation("quidcraft","/textures/models/QuaffleSkin.png");
+		return quaffle;
 	}
 }

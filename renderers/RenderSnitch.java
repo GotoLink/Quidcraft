@@ -1,8 +1,8 @@
 package assets.quidcraft.renderers;
 
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RenderSnitch extends Render {
 
 	protected ModelSnitch modelSnitch;
+	private final static ResourceLocation snitch = new ResourceLocation("quidcraft","textures/models/SnitchSkin.png");
 	public RenderSnitch(ModelSnitch model, float f) {
 		this.shadowSize =f;
 		this.modelSnitch = model;
@@ -45,6 +46,6 @@ public class RenderSnitch extends Render {
 
 	@Override
 	protected ResourceLocation func_110775_a(Entity entity) {
-		return new ResourceLocation("quidcraft","/textures/models/SnitchSkin.png");
+		return snitch;
 	}
 }

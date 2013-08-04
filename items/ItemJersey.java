@@ -25,6 +25,6 @@ public class ItemJersey extends ItemArmor {
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer)
     {	
-		return "/mods/quidcraft/textures/models/jersey"+Quidcraft.instance.jerseyNames[stack.itemID-Quidcraft.Jersey_ID-256]+".png";
+		return "quidcraft:textures/models/jersey"+Quidcraft.instance.jerseyNames[stack.itemID-Quidcraft.Jersey_ID-256]+".png";
     }
 }

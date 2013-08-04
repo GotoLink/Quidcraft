@@ -1,8 +1,8 @@
 package assets.quidcraft.renderers;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderBludger extends Render
 {
+	public static final ResourceLocation bludger = new ResourceLocation("quidcraft","textures/models/BludgerSkin.png");
     public RenderBludger(ModelBludger model, float f)
     {
     	this.shadowSize =f;
@@ -48,6 +49,6 @@ public class RenderBludger extends Render
 
 	@Override
 	protected ResourceLocation func_110775_a(Entity entity) {
-		return new ResourceLocation("quidcraft","/textures/models/BludgerSkin.png");
+		return bludger;
 	}
 }

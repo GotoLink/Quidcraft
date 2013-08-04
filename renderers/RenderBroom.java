@@ -2,16 +2,14 @@
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import assets.paraknight.steambikes.EntitySteamBike;
 import assets.quidcraft.entities.EntityBroom;
 import assets.quidcraft.models.ModelBroom;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
@@ -56,10 +54,11 @@ import cpw.mods.fml.relauncher.SideOnly;
        }
        
        protected ModelBase modelBroom;
+       private final static ResourceLocation broom = new ResourceLocation("quidcraft","textures/models/BroomSkin.png");
 
        @Override
        protected ResourceLocation func_110775_a(Entity entity) {
-    	   return new ResourceLocation("quidcraft","/textures/models/BroomSkin.png");
+    	   return broom;
        }
    }
 

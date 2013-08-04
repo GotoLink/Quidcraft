@@ -26,6 +26,6 @@ public class ItemHeadband extends ItemArmor{
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer)
     {
-		return "/mods/quidcraft/textures/models/headband"+Quidcraft.instance.headbandNames[stack.itemID-Quidcraft.Headband_ID-256]+".png";
+		return "quidcraft:textures/models/headband"+Quidcraft.instance.headbandNames[stack.itemID-Quidcraft.Headband_ID-256]+".png";
     }
 }
