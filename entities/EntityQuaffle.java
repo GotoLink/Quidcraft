@@ -62,15 +62,11 @@ public class EntityQuaffle extends Entity
         //motionZ = /*entity.motionZ + */2*force*zHeading*MathHelper.cos((pitch / 180F) * 3.141593F);
 
         //setPosition(i,j,k);
-        //setSize(0.5F, 0.5F);
         prevPosX = posX;
         prevPosY = posY;
         prevPosZ = posZ;
     }
     
-    public void entityInit(){
-    	
-    }
     @Override
     protected boolean canTriggerWalking()
     {
@@ -229,14 +225,15 @@ public class EntityQuaffle extends Entity
     	}
     }
     @Override
-    public void readEntityFromNBT(NBTTagCompound nbttagcompound){
-    }
+	protected void entityInit() {}
     @Override
-    public void writeEntityToNBT(NBTTagCompound nbttagcompound){
-    }
+    public void readEntityFromNBT(NBTTagCompound nbttagcompound){}
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbttagcompound){}
 
     int ticksInAir;
     double bounceFactor;
     boolean collided;
     boolean stopped;
+	
 }

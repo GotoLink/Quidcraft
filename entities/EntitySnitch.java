@@ -2,11 +2,10 @@ package assets.quidcraft.entities;
 
 import java.util.List;
 
-import assets.quidcraft.Quidcraft;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -14,24 +13,22 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import assets.quidcraft.Quidcraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntitySnitch extends EntityFlying implements IAnimals{
 	
+	private static double speedFactor = 1.0D;
 	public EntitySnitch(World world)
     {
         super(world);
         setSize(0.1F, 0.1F);
-        //moveSpeed=0.25F;
     }
 	
 	public EntitySnitch(World world,EntityPlayer entityplayer)
     {
         this(world);
-        setSize(0.1F, 0.1F);
-        //moveSpeed=.25F;
-        
         setLocationAndAngles(entityplayer.posX, entityplayer.posY
 				+ (double) entityplayer.getEyeHeight(), entityplayer.posZ,
 				entityplayer.rotationYaw, entityplayer.rotationPitch);
@@ -47,12 +44,21 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
         double x = i;
         double y = j;
         double z = k;
-
         setPosition(i,j,k);
-        
         prevPosX = posX;
         prevPosY = posY;
         prevPosZ = posZ;
+    }
+	@Override
+	protected boolean isAIEnabled()
+    {
+        return true;
+    }
+	@Override
+	protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(speedFactor);
     }
 	@Override
 	public void onEntityUpdate()
@@ -112,28 +118,6 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
         {
             inWater = false;
         }
-        if(worldObj.isRemote)
-        {
-            //fire = 0;
-        } else
-        /*if(fire > 0)
-        {
-            if(isImmuneToFire)
-            {
-                fire -= 4;
-                if(fire < 0)
-                {
-                    fire = 0;
-                }
-            } else
-            {
-                if(fire % 20 == 0)
-                {
-                    attackEntityFrom(DamageSource.onFire, 1);
-                }
-                fire--;
-            }
-        }*/
         if(handleLavaMovement())
         {
             setOnFireFromLava();
@@ -144,7 +128,6 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
         }
         if(!worldObj.isRemote)
         {
-            //setFlag(0, fire > 0);
             setFlag(2, ridingEntity != null);
         }
         
@@ -163,12 +146,7 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
 		
 		// find closest seeker
 		// fly away, if too far, fly randomly
-		target = findClosestPlayer();
-		int i=0;
-		if(!worldObj.isRemote && !worldObj.playerEntities.isEmpty())
-			{while (worldObj.playerEntities.get(i)==null)
-				i++;
-			target = (Entity) worldObj.playerEntities.get(i);}
+		target = this.worldObj.getClosestPlayerToEntity(this, 16F);;
 		waypointX = posX;
 		waypointY = posY;
 		waypointZ = posZ;
@@ -185,9 +163,9 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
 		double d2 = waypointZ - posZ;
 		double d3 = MathHelper.sqrt_double(d * d + d1 * d1 + d2 * d2);
 
-		motionX = (d / d3) * getMoveHelper().getSpeed();
-		motionY = (d1 / d3) * getMoveHelper().getSpeed();
-		motionZ = (d2 / d3) * getMoveHelper().getSpeed();
+		motionX = (d / d3) * speedFactor;
+		motionY = (d1 / d3) * speedFactor;
+		motionZ = (d2 / d3) * speedFactor;
 
 		if (target == null) {
 			motionX = 0;
@@ -222,11 +200,8 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
 	public boolean interact(EntityPlayer entityplayer)
     {
 		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-		float distance = this.getDistanceToEntity(entityplayer);
-		//System.out.println(distance);
-        if(distance <= 2.5F && itemstack != null && itemstack.itemID == Quidcraft.SnitchGlove.itemID)
+		if(this.getDistanceToEntity(entityplayer) <= 2.5F && itemstack != null && itemstack.itemID == Quidcraft.SnitchGlove.itemID)
         {
-        	//entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, new ItemStack(mod_QuidditchSMP.Bludger));
         	if(entityplayer.inventory.addItemStackToInventory(new ItemStack(Quidcraft.Snitch, 1))){
         		entityplayer.onItemPickup(this, 1);
         		setDead();
@@ -239,33 +214,13 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
             return false;
         
     }
-	
-	public Entity findClosestPlayer() {
-		float d = 0F;
-		List entities = worldObj.getLoadedEntityList();
-		EntityLiving ent = null;
-		target = null;
-
-		for (int i = 0; i < entities.size(); i++) {
-			if ((Entity) entities.get(i) != null) {
-				if ((Entity) entities.get(i) instanceof EntityPlayer
-						&& this.canEntityBeSeen((Entity) entities.get(i))) {
-					ent = (EntityLiving) entities.get(i);
-					float d1 = ent.getDistanceToEntity(this);
-					if (d1 < d || target == null) {
-						d = d1;
-						target = ent;
-					}
-				}
-			}
-		}
-		return target;
-	}
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isInRangeToRenderVec3D(Vec3 vec3d)
     {
         return true;
     }
+	@Override
 	@SideOnly(Side.CLIENT)
     public boolean isInRangeToRenderDist(double d)
     {
@@ -273,15 +228,17 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
     }
     @Override
 	public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
+    	super.writeEntityToNBT(nbttagcompound);
 		nbttagcompound.setShort("wingFlap", (short) wingFlap);
 		nbttagcompound.setBoolean("wingsUp", wingsUp);
 	}
     @Override
 	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
+    	super.readEntityFromNBT(nbttagcompound);
 		wingFlap = nbttagcompound.getShort("wingFlap");
 		wingsUp = nbttagcompound.getBoolean("wingsUp");
 	}
-	
+    @Override
 	public boolean canBreatheUnderwater()
     {
         return true;

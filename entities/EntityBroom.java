@@ -2,19 +2,20 @@ package assets.quidcraft.entities;
 
 import java.util.List;
 
-import assets.quidcraft.Quidcraft;
-
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import assets.quidcraft.Quidcraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityBroom extends EntityBoat
+public class EntityBroom extends Entity
 {
     private int broomPosRotationIncrements;
     private double broomX,broomY,broomZ;
@@ -27,13 +28,15 @@ public class EntityBroom extends EntityBoat
     private double velocityY;
     @SideOnly(Side.CLIENT)
     private double velocityZ;
-    private boolean field_70279_a;
+    private boolean isEmpty;
 
     public EntityBroom(World world)
     {
         super(world);
+        this.preventEntitySpawning = true;
         this.setSize(1.3F, 0.6F);
-        this.field_70279_a = true;
+        this.isEmpty = true;
+        this.yOffset = this.height / 2.0F;
     }
     
     public EntityBroom(World world, double d, double d1, double d2)
@@ -87,11 +90,11 @@ public class EntityBroom extends EntityBoat
         else 
         	return true;
     }
-    
+    @Override
     @SideOnly(Side.CLIENT)
     public void setPositionAndRotation2(double d, double d1, double d2, float f,float f1, int i)
     {
-    	if (this.field_70279_a)
+    	if (this.isEmpty)
         {
             this.broomPosRotationIncrements = i + 5;
         }
@@ -118,6 +121,7 @@ public class EntityBroom extends EntityBoat
         this.motionY = this.velocityY;
         this.motionZ = this.velocityZ;
     }
+    @Override
     @SideOnly(Side.CLIENT)
     public void setVelocity(double d, double d1, double d2)
     {
@@ -126,9 +130,50 @@ public class EntityBroom extends EntityBoat
     	this.velocityZ = this.motionZ = d2;
     }
     @Override
+    public boolean func_130002_c(EntityPlayer par1EntityPlayer)
+    {
+        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != par1EntityPlayer)
+        {
+            return true;
+        }
+        else
+        {
+            if (!this.worldObj.isRemote)
+            {
+                par1EntityPlayer.mountEntity(this);
+            }
+
+            return true;
+        }
+    }
+    public void setDamageTaken(float par1)
+    {
+        this.dataWatcher.updateObject(19, Float.valueOf(par1));
+    }
+    public float getDamageTaken()
+    {
+        return this.dataWatcher.func_111145_d(19);
+    }
+    public void setTimeSinceHit(int par1)
+    {
+        this.dataWatcher.updateObject(17, Integer.valueOf(par1));
+    }
+    public int getTimeSinceHit()
+    {
+        return this.dataWatcher.getWatchableObjectInt(17);
+    }
+    public void setForwardDirection(int par1)
+    {
+        this.dataWatcher.updateObject(18, Integer.valueOf(par1));
+    }
+    public int getForwardDirection()
+    {
+        return this.dataWatcher.getWatchableObjectInt(18);
+    }
+    @Override
     public void onUpdate()
     {
-        super.onEntityUpdate();
+        super.onUpdate();
         if(this.getTimeSinceHit() > 0)
         {
         	this.setTimeSinceHit(this.getTimeSinceHit() - 1);
@@ -144,7 +189,7 @@ public class EntityBroom extends EntityBoat
        
         double d1 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
         
-        if(this.worldObj.isRemote && this.field_70279_a)
+        if(this.worldObj.isRemote && this.isEmpty)
         {
             if(this.broomPosRotationIncrements > 0)
             {
@@ -163,51 +208,24 @@ public class EntityBroom extends EntityBoat
                 double d11 = this.posY + this.motionY;
                 double d14 = this.posZ + this.motionZ;
                 this.setPosition(d5, d11, d14);
-                if(this.onGround)
-                {
-                	this.motionX *= 0.5D;
-                	this.motionY *= 0.5D;
-                	this.motionZ *= 0.5D;
-                }
-                this.motionX *= 0.9900000095367432D;
-                this.motionY *= 0.949999988079071D;
-                this.motionZ *= 0.9900000095367432D;
+                this.motionX *= 0.99D;
+                this.motionY *= 0.95D;
+                this.motionZ *= 0.99D;
             }
         }else
         {
-	        if( this.riddenByEntity != null)
+        	if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase)
+            {
+                double d4 = (double)((EntityLivingBase)this.riddenByEntity).moveForward;//>0 for forward key, <0 for backward
+                double d5 = (double)((EntityLivingBase)this.riddenByEntity).moveStrafing;//>0 for left key, <0 for right key
+            	double d0 = -Math.sin((double)(this.riddenByEntity.rotationYaw * (float)Math.PI / 180.0F));
+                double d11 = Math.cos((double)(this.riddenByEntity.rotationYaw * (float)Math.PI / 180.0F));
+                this.motionX += (d5*d11 + d0*d4)* 0.08;
+                this.motionZ += (d4*d11 - d0*d5) * 0.08;
+            }
+	        if(this.riddenByEntity != null)
 	        {
-	        	double acc = 0.05;	
-				double maxX = riddenByEntity.motionX*29.0D;
-				double maxZ = riddenByEntity.motionZ*29.0D;
-				
-	            //motionX += maxX * 0.060000000000000001D;
-	            //motionZ += maxZ * 0.060000000000000001D;
-				if(maxX == 0)
-					if (this.motionX > 0)
-						this.motionX -= acc;
-					else if (this.motionX < 0)
-						this.motionX += acc;
-				if(maxZ == 0)
-	            	if(this.motionZ > 0)
-	            		this.motionZ -= acc;   	
-	            	else if( this.motionZ < 0)
-	            		this.motionZ += acc;
-	            //keep within max speeds
-	            if(this.motionX > maxX && maxX<0)
-	            		this.motionX -= acc;
-	            else if (this.motionX < maxX && maxX>0)
-	            		this.motionX += acc;
-	            else if(Math.abs(this.motionX) > Math.abs(maxX))
-	            		this.motionX = maxX;
-	                  
-	            if(this.motionZ > maxZ && maxZ<0)
-	        		this.motionZ -= acc;
-	            else if (this.motionZ < maxZ && maxZ>0)
-	        		this.motionZ += acc;
-	            else if(Math.abs(this.motionZ) > Math.abs(maxZ))
-	        		this.motionZ = maxZ;
-	                 
+	        	double acc = 0.05D;
 	          //move up if hitting wall
 	    		if(this.isCollidedHorizontally)
 	    			this.motionY += acc;
@@ -227,30 +245,33 @@ public class EntityBroom extends EntityBoat
 						this.motionY -= acc;
 				}
 				//decrease y speed
-				if(motionY > 0 && !isGoingUp && !isGoingDown && !isCollidedHorizontally){
-					motionY -= acc;
-					if(motionY < 0)
-						motionY = 0;
-				}
-				if(motionY < 0 && !isGoingUp && !isGoingDown && !isCollidedHorizontally){
-					motionY += acc;
+	    		if(!isGoingUp && !isGoingDown && !isCollidedHorizontally)
+	    		{
 					if(motionY > 0)
-						motionY = 0;
-				}
+					{
+						motionY -= acc;
+						if(motionY < 0)
+							motionY = 0;
+					}
+					else
+					{
+						motionY += acc;
+						if(motionY > 0)
+							motionY = 0;
+					}
+	    		}
 	        }
-	        else if(!this.onGround)
-	        {
-	        	this.motionY -= 0.1;
-	        	if(this.motionY < -0.5D)
-	        		this.motionY = -0.5D;
-	        }
-	        
 	        else
 	        {
+	        	if(!this.onGround)
+		        {
+		        	this.motionY -= 0.1;
+		        	if(this.motionY < -0.5D)
+		        		this.motionY = -0.5D;
+		        }
 	        	//slow down
 	        	this.motionX *= 0.5D;
 	        	this.motionZ *= 0.5D;
-	        	this.motionY = 0.0D;
 	        	this.isGoingDown = false;
 	        }
         
@@ -289,7 +310,7 @@ public class EntityBroom extends EntityBoat
 	        this.rotationYaw = (float)((double)this.rotationYaw + var14);
 	        this.setRotation(this.rotationYaw, this.rotationPitch);
 	        if(!worldObj.isRemote){
-		        List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
+		        List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(0.2D, 0.0D, 0.2D));
 		        if(list != null && !list.isEmpty() )
 		        {
 		            for(int j1 = 0; j1 < list.size(); ++j1)
@@ -311,6 +332,42 @@ public class EntityBroom extends EntityBoat
     @SideOnly(Side.CLIENT)
     public void func_70270_d(boolean par1)
     {
-        this.field_70279_a = par1;
+        this.isEmpty = par1;
     }
+    @Override
+    protected boolean canTriggerWalking()
+    {
+        return false;
+    }
+    @Override
+    protected void entityInit()
+    {
+        this.dataWatcher.addObject(17, new Integer(0));
+        this.dataWatcher.addObject(18, new Integer(1));
+        this.dataWatcher.addObject(19, new Float(0.0F));
+    }
+    @Override
+    public boolean canBeCollidedWith()
+    {
+        return !this.isDead;
+    }
+    @Override
+    public AxisAlignedBB getCollisionBox(Entity par1Entity)
+    {
+        return par1Entity.boundingBox;
+    }
+    @Override
+    public AxisAlignedBB getBoundingBox()
+    {
+        return this.boundingBox;
+    }
+    @Override
+    public boolean canBePushed()
+    {
+        return true;
+    }
+	@Override
+	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {}
+	@Override
+	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {}
 }

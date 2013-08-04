@@ -2,11 +2,9 @@ package assets.quidcraft.entities;
 
 import java.util.List;
 
-import assets.quidcraft.Quidcraft;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +14,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import assets.quidcraft.Quidcraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -24,19 +23,18 @@ public class EntityBludger extends EntityFlying implements IMob {
 	public double waypointX;
 	public double waypointY;
 	public double waypointZ;
-	private Entity target;
+	private Entity target = null;
 	private Entity attacker;
 	private double attackerX;
 	private double attackerY;
 	private double attackerZ;
 	private int ticksSinceHit;
+	private static double speedFactor = 0.6D;
 
 	public EntityBludger(World world) {
 		super(world);
-		target = null;
 		setSize(0.4F, 0.4F);
 		isImmuneToFire = true;
-		//moveSpeed = 0.6F;
 	}
 
 	public EntityBludger(World world, EntityPlayer entityplayer) {
@@ -63,42 +61,35 @@ public class EntityBludger extends EntityFlying implements IMob {
         prevPosZ = posZ;
     }
 	@Override
+	protected boolean isAIEnabled()
+    {
+        return true;
+    }
+	@Override
 	protected void func_110147_ax()
     {
         super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.6D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(speedFactor);
     }
 	
 	@Override
 	public boolean attackEntityFrom(DamageSource damagesource, float i) {
 		attacker = damagesource.getEntity();
-		if (attacker != null) {
-			if (attacker instanceof EntityPlayer) {
-
-				// check that hit with bat
-				EntityPlayer playerAttacker = (EntityPlayer) attacker;
-
-				ItemStack itemstack = playerAttacker.inventory.getCurrentItem();
-				if (itemstack != null
-						&& itemstack.itemID == Quidcraft.Bat.itemID) {
-					attackerX = attacker.posX;
-					attackerY = attacker.posY;
-					attackerZ = attacker.posZ;
-					ticksSinceHit = 20;
-					return true;
-				}
+		if (attacker instanceof EntityPlayer) 
+		{
+			// check that hit with bat
+			ItemStack itemstack = ((EntityPlayer) attacker).getCurrentEquippedItem();
+			if (itemstack != null && itemstack.itemID == Quidcraft.Bat.itemID) {
+				attackerX = attacker.posX;
+				attackerY = attacker.posY;
+				attackerZ = attacker.posZ;
+				ticksSinceHit = 20;
+				return true;
 			}
 		}
 		return true;
 	}
-/*
-	protected void entityInit() {
-		super.entityInit();
-	}
-*/
-	public int getMaxHealth() {
-		return 0;
-	}
+
 	@Override
 	public void onEntityUpdate() {
 		if(worldObj.isRemote)
@@ -149,25 +140,13 @@ public class EntityBludger extends EntityFlying implements IMob {
 		} else {
 			inWater = false;
 		}
-		if (worldObj.isRemote) {
-			// fire = 0;
-		} else
-		/*
-		 * if(fire > 0) { if(isImmuneToFire) { fire -= 4; if(fire < 0) { fire =
-		 * 0; } } else { if(fire % 20 == 0) {
-		 * attackEntityFrom(DamageSource.onFire, 1); } fire--; } }
-		 */
 		if (handleLavaMovement()) {
 			setOnFireFromLava();
 		}
 		if (posY < -64D) {
 			kill();
 		}
-		if (!worldObj.isRemote) {
-			// setFlag(0, fire > 0);
-			setFlag(2, ridingEntity != null);
-		}
-
+		setFlag(2, ridingEntity != null);
 		updateEntityActionState();
 	}
 
@@ -175,10 +154,7 @@ public class EntityBludger extends EntityFlying implements IMob {
 		if(worldObj.isRemote)
 			return;
 		int i=0;
-		if(!worldObj.isRemote && !worldObj.playerEntities.isEmpty())
-		{while (worldObj.playerEntities.get(i)==null)
-			i++;
-		target = (Entity) worldObj.playerEntities.get(i);}
+		target = this.worldObj.getClosestPlayerToEntity(this, 16F);
 
 		if (ticksSinceHit == 20) {
 			waypointX = posX - 50 * (attackerX - posX);
@@ -207,33 +183,13 @@ public class EntityBludger extends EntityFlying implements IMob {
 		double d2 = waypointZ - posZ;
 		double d3 = MathHelper.sqrt_double(d * d + d1 * d1 + d2 * d2);
 
-		motionX = (d / d3) * getMoveHelper().getSpeed();
-		motionY = (d1 / d3) * getMoveHelper().getSpeed();
-		motionZ = (d2 / d3) * getMoveHelper().getSpeed();
+		motionX = (d / d3) * speedFactor;
+		motionY = (d1 / d3) * speedFactor;
+		motionZ = (d2 / d3) * speedFactor;
 
-		// moveEntity(motionX,motionY,motionZ);
+		moveEntity(motionX,motionY,motionZ);
 	}
 
-	public Entity findClosestPlayer() {
-		float d = 0F;
-		List entities = worldObj.loadedEntityList;
-		EntityLiving ent = null;
-		target = null;
-		for (int i = 0; i < entities.size(); i++) {
-			if ((Entity) entities.get(i) != null) {
-				if ((Entity) entities.get(i) instanceof EntityPlayer) {
-					// && this.canEntityBeSeen((Entity) entities.get(i))) {
-					ent = (EntityLiving) entities.get(i);
-					float d1 = ent.getDistanceToEntity(this);
-					if (d1 < d || target == null) {
-						d = d1;
-						target = ent;
-					}
-				}
-			}
-		}
-		return target;
-	}
 	@Override
 	public boolean interact(EntityPlayer entityplayer) {
 		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
@@ -284,11 +240,13 @@ public class EntityBludger extends EntityFlying implements IMob {
 		}
 		// damage
 	}
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isInRangeToRenderVec3D(Vec3 vec3d)
     {
         return true;
     }
+	@Override
 	@SideOnly(Side.CLIENT)
     public boolean isInRangeToRenderDist(double d)
     {
