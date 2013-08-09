@@ -135,6 +135,8 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
     }
 	
 	protected void updateEntityActionState(){
+		if(worldObj.isRemote)
+			return;
 		if(ticksToChangeDirection <= 0){
 			randomX = (rand.nextDouble()*10.0) - 5.0;
 			randomY = (rand.nextDouble()*10.0) - 5.0;
@@ -146,7 +148,7 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
 		
 		// find closest seeker
 		// fly away, if too far, fly randomly
-		target = this.worldObj.getClosestPlayerToEntity(this, 16F);;
+		target = this.worldObj.getClosestPlayerToEntity(this, 16F);
 		waypointX = posX;
 		waypointY = posY;
 		waypointZ = posZ;
