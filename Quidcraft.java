@@ -58,26 +58,25 @@ public class Quidcraft{
 		proxy.preInit();
 		Configuration config=new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
-		Quaffle_ID=config.get("Item", "Quaffle ID", 11160).getInt(11160);
-		Bludger_ID=config.get("Item", "Bludger ID", 11161).getInt(11161);
-		Snitch_ID=config.get("Item", "Snitch ID", 11162).getInt(11162);
-		Bat_ID=config.get("Item", "Bat ID", 11163).getInt(11163);
-		Broom_ID=config.get("Item", "Broom ID", 11164).getInt(11164);
-		BludgerGlove_ID=config.get("Item", "Bludger Glove ID", 11165).getInt(11165);
-		SnitchGlove_ID=config.get("Item", "Snitch Glove ID", 11166).getInt(11166);
-		Jersey_ID=config.get("Item", "Jersey ID", 11167).getInt(11167);
-		Headband_ID=config.get("Item", "Headband ID", 11174).getInt(11174);
-		BlockGoal_ID=config.get("Block", "Block Goal ID", 2000).getInt(2000);
-		QuidditchChest_ID=config.get("Block", "Quidditch Chest ID", 2001).getInt(2001);
-		BoundaryFlag_ID=config.get("Block", "Boundary Flag ID", 2002).getInt(2002);
-		ScoreAreaFlag_ID=config.get("Block", "Score Area Flag ID", 2003).getInt(2003);	
+		Quaffle_ID=config.getItem("Quaffle ID", 11160).getInt(11160);
+		Bludger_ID=config.getItem("Bludger ID", 11161).getInt(11161);
+		Snitch_ID=config.getItem("Snitch ID", 11162).getInt(11162);
+		Bat_ID=config.getItem("Bat ID", 11163).getInt(11163);
+		Broom_ID=config.getItem("Broom ID", 11164).getInt(11164);
+		BludgerGlove_ID=config.getItem("Bludger Glove ID", 11165).getInt(11165);
+		SnitchGlove_ID=config.getItem("Snitch Glove ID", 11166).getInt(11166);
+		Jersey_ID=config.getItem("Jersey ID", 11167).getInt(11167);
+		Headband_ID=config.getItem("Headband ID", 11174).getInt(11174);
+		BlockGoal_ID=config.getBlock("Block Goal ID", 2000).getInt(2000);
+		QuidditchChest_ID=config.getBlock("Quidditch Chest ID", 2001).getInt(2001);
+		BoundaryFlag_ID=config.getBlock("Boundary Flag ID", 2002).getInt(2002);
+		ScoreAreaFlag_ID=config.getBlock("Score Area Flag ID", 2003).getInt(2003);	
 		if (config.hasChanged())
 			config.save();
 	}
 	@EventHandler
 	public void loadQuidditch(FMLInitializationEvent event) {
 
-		instance = this;	
 		proxy.registerRenderThings();
 		/* Entities*/
 		EntityRegistry.registerModEntity(EntityBludger.class, "QuidditchModBludger", 1,this,40,1,true);
