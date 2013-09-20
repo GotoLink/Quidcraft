@@ -55,10 +55,10 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
         return true;
     }
 	@Override
-	protected void func_110147_ax()
+	protected void applyEntityAttributes()
     {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(speedFactor);
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(speedFactor);
     }
 	@Override
 	public void onEntityUpdate()

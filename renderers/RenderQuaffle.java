@@ -27,8 +27,7 @@ public class RenderQuaffle extends Render
     	GL11.glPushMatrix();
         GL11.glTranslatef((float)d, (float)d1, (float)d2);
         GL11.glRotatef((-1)*yaw, 0.0F, 1.0F, 0.0F);
-        //loadTexture("/mods/quidcraft/textures/models/QuaffleSkin.png");
-        func_110777_b(entityquaffle);
+        bindEntityTexture(entityquaffle);
         GL11.glScalef(-1F, -1F, 1.0F);
         modelQuaffle.render(entityquaffle, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
@@ -44,7 +43,7 @@ public class RenderQuaffle extends Render
     private final static ResourceLocation quaffle = new ResourceLocation("quidcraft","textures/models/QuaffleSkin.png");
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return quaffle;
 	}
 }

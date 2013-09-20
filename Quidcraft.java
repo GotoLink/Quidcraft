@@ -85,48 +85,48 @@ public class Quidcraft{
 		EntityRegistry.registerModEntity(EntityBroom.class, "QuidditchModBroom",4,this,40,1,true);		
 		
 		/* Bat */
-		Bat = (new ItemBat(Bat_ID)).setUnlocalizedName("quidcraft:Bat").setMaxStackSize(1).func_111206_d("quidcraft:Bat");
+		Bat = (new ItemBat(Bat_ID)).setUnlocalizedName("quidcraft:Bat").setMaxStackSize(1).setTextureName("quidcraft:Bat");
 		LanguageRegistry.addName(Bat, "Bat");
 		GameRegistry.addRecipe(new ItemStack(Bat), new Object[] {
 				"  w", " w ", "s  ", Character.valueOf('s'), Item.stick,
 				Character.valueOf('w'), Block.planks});
 		/* Bludger */
-		Bludger = (new ItemBludger(Bludger_ID)).setUnlocalizedName("quidcraft:Bludger").setMaxStackSize(1).func_111206_d("quidcraft:Bludger");
+		Bludger = (new ItemBludger(Bludger_ID)).setUnlocalizedName("quidcraft:Bludger").setMaxStackSize(1).setTextureName("quidcraft:Bludger");
 		LanguageRegistry.addName(Bludger, "Bludger");
 		GameRegistry.addRecipe(new ItemStack(Bludger), new Object[] {
 				" i ", "ibi", " i ", Character.valueOf('i'), Item.ingotIron,
 									 Character.valueOf('b'), Item.bone});
 		/* Bludger Glove */
-		BludgerGlove = (new ItemBludgerGlove(BludgerGlove_ID)).setUnlocalizedName("quidcraft:BludgerGlove").setMaxStackSize(1).func_111206_d("quidcraft:BludgerGlove");
+		BludgerGlove = (new ItemBludgerGlove(BludgerGlove_ID)).setUnlocalizedName("quidcraft:BludgerGlove").setMaxStackSize(1).setTextureName("quidcraft:BludgerGlove");
 		LanguageRegistry.addName(BludgerGlove, "Bludger Gloves");
 		GameRegistry.addRecipe(new ItemStack(BludgerGlove), new Object[] {
 				"i i", Character.valueOf('i'), Item.ingotIron});
 		/* Broom */
-		Broom = (new ItemBroom(Broom_ID)).setUnlocalizedName("quidcraft:Broom").setMaxStackSize(1).func_111206_d("quidcraft:Broom");
+		Broom = (new ItemBroom(Broom_ID)).setUnlocalizedName("quidcraft:Broom").setMaxStackSize(1).setTextureName("quidcraft:Broom");
 		LanguageRegistry.addName(Broom, "Broom");
 		GameRegistry.addRecipe(new ItemStack(Broom), new Object[] {
 				"  s", " s ", "w  ", Character.valueOf('s'), Item.stick,
 				Character.valueOf('w'), Item.wheat});
 		/* Quaffle */
-		Quaffle = (new ItemQuaffle(Quaffle_ID)).setUnlocalizedName("quidcraft:Quaffle").setMaxStackSize(1).func_111206_d("quidcraft:Quaffle");
+		Quaffle = (new ItemQuaffle(Quaffle_ID)).setUnlocalizedName("quidcraft:Quaffle").setMaxStackSize(1).setTextureName("quidcraft:Quaffle");
 		LanguageRegistry.addName(Quaffle, "Quaffle");
 		GameRegistry.addRecipe(new ItemStack(Quaffle), new Object[] {
 				" l ", "l l", " l ", Character.valueOf('l'), Item.leather});
 		/* Snitch */
-		Snitch = (new ItemSnitch(Snitch_ID)).setUnlocalizedName("quidcraft:Snitch").setMaxStackSize(1).func_111206_d("quidcraft:Snitch");
+		Snitch = (new ItemSnitch(Snitch_ID)).setUnlocalizedName("quidcraft:Snitch").setMaxStackSize(1).setTextureName("quidcraft:Snitch");
 		LanguageRegistry.addName(Snitch, "Snitch");
 		GameRegistry.addRecipe(new ItemStack(Snitch, 1), new Object[] {
 				"fgf", Character.valueOf('g'), Item.ingotGold,
 				Character.valueOf('f'), Item.feather});		
 		/* Snitch Glove */
-		SnitchGlove = (new ItemSnitchGlove(SnitchGlove_ID)).setUnlocalizedName("quidcraft:SnitchGlove").setMaxStackSize(1).func_111206_d("quidcraft:SnitchGlove");
+		SnitchGlove = (new ItemSnitchGlove(SnitchGlove_ID)).setUnlocalizedName("quidcraft:SnitchGlove").setMaxStackSize(1).setTextureName("quidcraft:SnitchGlove");
 		LanguageRegistry.addName(SnitchGlove, "Snitch Gloves");
 		GameRegistry.addRecipe(new ItemStack(SnitchGlove), new Object[] {
 				"l l", Character.valueOf('l'), Item.leather});
 		
 		/* Jerseys */
 		for (int i = 0; i < jerseyNames.length; i++) {
-		Jersey[i] = (new ItemJersey(Jersey_ID+i)).setUnlocalizedName("quidcraft:Jersey"+jerseyNames[i]).func_111206_d("quidcraft:Jersey"+jerseyNames[i]);
+		Jersey[i] = (new ItemJersey(Jersey_ID+i)).setUnlocalizedName("quidcraft:Jersey"+jerseyNames[i]).setTextureName("quidcraft:Jersey"+jerseyNames[i]);
 		LanguageRegistry.addName(Jersey[i], jerseyNames[i]+" Jersey");
 		for (int j=0; j < jerseyNames.length && j!=i; j++)
 			{
@@ -139,7 +139,7 @@ public class Quidcraft{
 	
 		/* Headbands */
 		for (int i = 0; i < headbandNames.length; i++) {
-		Headband[i] = (new ItemHeadband(Headband_ID+i)).setUnlocalizedName("quidcraft:Headband"+headbandNames[i]).func_111206_d("quidcraft:Headband"+headbandNames[i]);			
+		Headband[i] = (new ItemHeadband(Headband_ID+i)).setUnlocalizedName("quidcraft:Headband"+headbandNames[i]).setTextureName("quidcraft:Headband"+headbandNames[i]);			
 		LanguageRegistry.addName(Headband[i], headbandNames[i]+" Headband");
 			for (int j=0; j < headbandNames.length && j!=i; j++)
 			{
@@ -170,7 +170,7 @@ public class Quidcraft{
 		
 		/* Boundary Flag */
 		BoundaryFlag= (new BlockFlag(BoundaryFlag_ID)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep)
-				.setUnlocalizedName("quidcraft:Flag").func_111022_d("quidcraft:Flag");
+				.setUnlocalizedName("quidcraft:Flag").setTextureName("quidcraft:Flag");
 		GameRegistry.registerBlock(BoundaryFlag, "Boundary Flag");
 		LanguageRegistry.addName(BoundaryFlag, "Boundary Flag");
 		GameRegistry.addRecipe(new ItemStack(BoundaryFlag), new Object[] {
@@ -179,7 +179,7 @@ public class Quidcraft{
 		
 		/* Score Area Flag */
 		ScoreAreaFlag= (new BlockFlag(ScoreAreaFlag_ID)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep)
-				.setUnlocalizedName("quidcraft:ScoreAreaFlag").func_111022_d("quidcraft:ScoreAreaFlag");
+				.setUnlocalizedName("quidcraft:ScoreAreaFlag").setTextureName("quidcraft:ScoreAreaFlag");
 		GameRegistry.registerBlock(ScoreAreaFlag, "Score Area Flag");
 		LanguageRegistry.addName(ScoreAreaFlag, "Score Area Flag");
 		GameRegistry.addShapelessRecipe(new ItemStack(ScoreAreaFlag), new Object[] {

@@ -31,8 +31,7 @@ public class RenderSnitch extends Render {
 	    GL11.glRotatef(yaw, 0.0F, 1.0F, 0.0F);
 	    GL11.glRotatef(pitch, 0.0F, 0.0F, 1.0F);
 		
-		//loadTexture("/mods/quidcraft/textures/models/SnitchSkin.png");
-	    func_110777_b(entitysnitch);
+	    bindEntityTexture(entitysnitch);
 		GL11.glScalef(-1F, -1F, 1.0F);
 		modelSnitch.flap(entitysnitch.wingFlap);
 		modelSnitch.render(entitysnitch, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
@@ -45,7 +44,7 @@ public class RenderSnitch extends Render {
 	}
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return snitch;
 	}
 }

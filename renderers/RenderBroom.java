@@ -41,7 +41,7 @@ import cpw.mods.fml.relauncher.SideOnly;
            float f4 = 0.75F;
            GL11.glScalef(f4, f4, f4);
            GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
-           func_110777_b(entitybroom);
+           bindEntityTexture(entitybroom);
            //this.loadTexture("/mods/quidcraft/textures/models/BroomSkin.png");
            GL11.glScalef(-1F, -1F, 1.0F);
            modelBroom.render(entitybroom, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
@@ -57,7 +57,7 @@ import cpw.mods.fml.relauncher.SideOnly;
        private final static ResourceLocation broom = new ResourceLocation("quidcraft","textures/models/BroomSkin.png");
 
        @Override
-       protected ResourceLocation func_110775_a(Entity entity) {
+       protected ResourceLocation getEntityTexture(Entity entity) {
     	   return broom;
        }
    }

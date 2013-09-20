@@ -32,8 +32,7 @@ public class RenderBludger extends Render
         GL11.glRotatef(yaw, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(pitch, 0.0F, 0.0F, 1.0F);
         
-        //loadTexture("/mods/quidcraft/textures/models/BludgerSkin.png");
-        func_110777_b(entitybludger);
+        bindEntityTexture(entitybludger);
         GL11.glScalef(-1F, -1F, 1.0F);
         modelBludger.render(entitybludger, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
@@ -48,7 +47,7 @@ public class RenderBludger extends Render
     protected ModelBase modelBludger;
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return bludger;
 	}
 }
