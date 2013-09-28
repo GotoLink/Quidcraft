@@ -86,40 +86,47 @@ public class Quidcraft{
 		
 		/* Bat */
 		Bat = (new ItemBat(Bat_ID)).setUnlocalizedName("quidcraft:Bat").setMaxStackSize(1).setTextureName("quidcraft:Bat");
+		GameRegistry.registerItem(Bat, "Bat");
 		LanguageRegistry.addName(Bat, "Bat");
 		GameRegistry.addRecipe(new ItemStack(Bat), new Object[] {
 				"  w", " w ", "s  ", Character.valueOf('s'), Item.stick,
 				Character.valueOf('w'), Block.planks});
 		/* Bludger */
 		Bludger = (new ItemBludger(Bludger_ID)).setUnlocalizedName("quidcraft:Bludger").setMaxStackSize(1).setTextureName("quidcraft:Bludger");
+		GameRegistry.registerItem(Bludger, "Bludger");
 		LanguageRegistry.addName(Bludger, "Bludger");
 		GameRegistry.addRecipe(new ItemStack(Bludger), new Object[] {
 				" i ", "ibi", " i ", Character.valueOf('i'), Item.ingotIron,
 									 Character.valueOf('b'), Item.bone});
 		/* Bludger Glove */
 		BludgerGlove = (new ItemBludgerGlove(BludgerGlove_ID)).setUnlocalizedName("quidcraft:BludgerGlove").setMaxStackSize(1).setTextureName("quidcraft:BludgerGlove");
+		GameRegistry.registerItem(BludgerGlove, "Bludger Gloves");
 		LanguageRegistry.addName(BludgerGlove, "Bludger Gloves");
 		GameRegistry.addRecipe(new ItemStack(BludgerGlove), new Object[] {
 				"i i", Character.valueOf('i'), Item.ingotIron});
 		/* Broom */
 		Broom = (new ItemBroom(Broom_ID)).setUnlocalizedName("quidcraft:Broom").setMaxStackSize(1).setTextureName("quidcraft:Broom");
+		GameRegistry.registerItem(Broom, "Broom");
 		LanguageRegistry.addName(Broom, "Broom");
 		GameRegistry.addRecipe(new ItemStack(Broom), new Object[] {
 				"  s", " s ", "w  ", Character.valueOf('s'), Item.stick,
 				Character.valueOf('w'), Item.wheat});
 		/* Quaffle */
 		Quaffle = (new ItemQuaffle(Quaffle_ID)).setUnlocalizedName("quidcraft:Quaffle").setMaxStackSize(1).setTextureName("quidcraft:Quaffle");
+		GameRegistry.registerItem(Quaffle, "Quaffle");
 		LanguageRegistry.addName(Quaffle, "Quaffle");
 		GameRegistry.addRecipe(new ItemStack(Quaffle), new Object[] {
 				" l ", "l l", " l ", Character.valueOf('l'), Item.leather});
 		/* Snitch */
 		Snitch = (new ItemSnitch(Snitch_ID)).setUnlocalizedName("quidcraft:Snitch").setMaxStackSize(1).setTextureName("quidcraft:Snitch");
+		GameRegistry.registerItem(Snitch, "Snitch");
 		LanguageRegistry.addName(Snitch, "Snitch");
 		GameRegistry.addRecipe(new ItemStack(Snitch, 1), new Object[] {
 				"fgf", Character.valueOf('g'), Item.ingotGold,
 				Character.valueOf('f'), Item.feather});		
 		/* Snitch Glove */
 		SnitchGlove = (new ItemSnitchGlove(SnitchGlove_ID)).setUnlocalizedName("quidcraft:SnitchGlove").setMaxStackSize(1).setTextureName("quidcraft:SnitchGlove");
+		GameRegistry.registerItem(SnitchGlove, "Snitch Gloves");
 		LanguageRegistry.addName(SnitchGlove, "Snitch Gloves");
 		GameRegistry.addRecipe(new ItemStack(SnitchGlove), new Object[] {
 				"l l", Character.valueOf('l'), Item.leather});
@@ -127,6 +134,7 @@ public class Quidcraft{
 		/* Jerseys */
 		for (int i = 0; i < jerseyNames.length; i++) {
 		Jersey[i] = (new ItemJersey(Jersey_ID+i)).setUnlocalizedName("quidcraft:Jersey"+jerseyNames[i]).setTextureName("quidcraft:Jersey"+jerseyNames[i]);
+		GameRegistry.registerItem(Jersey[i], jerseyNames[i]+" Jersey");
 		LanguageRegistry.addName(Jersey[i], jerseyNames[i]+" Jersey");
 		for (int j=0; j < jerseyNames.length && j!=i; j++)
 			{
@@ -140,6 +148,7 @@ public class Quidcraft{
 		/* Headbands */
 		for (int i = 0; i < headbandNames.length; i++) {
 		Headband[i] = (new ItemHeadband(Headband_ID+i)).setUnlocalizedName("quidcraft:Headband"+headbandNames[i]).setTextureName("quidcraft:Headband"+headbandNames[i]);			
+		GameRegistry.registerItem(Headband[i], headbandNames[i]+" Headband");
 		LanguageRegistry.addName(Headband[i], headbandNames[i]+" Headband");
 			for (int j=0; j < headbandNames.length && j!=i; j++)
 			{
@@ -187,7 +196,4 @@ public class Quidcraft{
 		GameRegistry.addShapelessRecipe(new ItemStack(BoundaryFlag), new Object[] {
 			ScoreAreaFlag, new ItemStack(Item.dyePowder, 1, 15)});		
 	}
-	@EventHandler
-	public void modsLoaded(FMLPostInitializationEvent event)
-	{}
 }
