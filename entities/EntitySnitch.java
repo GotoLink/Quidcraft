@@ -1,10 +1,7 @@
 package assets.quidcraft.entities;
 
-import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,9 +38,6 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
 	public EntitySnitch(World world, double i, double j, double k)
     {
         this(world);
-        double x = i;
-        double y = j;
-        double z = k;
         setPosition(i,j,k);
         prevPosX = posX;
         prevPosY = posY;
@@ -134,6 +128,7 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
         updateEntityActionState();
     }
 	
+	@Override
 	protected void updateEntityActionState(){
 		if(worldObj.isRemote)
 			return;
@@ -246,7 +241,6 @@ public class EntitySnitch extends EntityFlying implements IAnimals{
         return true;
     }
 	
-	private int ticksIdle = 0;
 	private int ticksToChangeDirection = 0;
 	private Entity target;
 	private double waypointX = posX;

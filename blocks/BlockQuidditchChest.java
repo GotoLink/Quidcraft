@@ -22,11 +22,13 @@ public class BlockQuidditchChest extends Block{
         super(i, Material.wood);
         this.setCreativeTab(CreativeTabs.creativeTabArray[Quidcraft.proxy.tabQuidditch]);
     }
+	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int i,int j)
     {
 		return i<2?this.icons[0]:this.icons[1];      
     }
+	@Override
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {

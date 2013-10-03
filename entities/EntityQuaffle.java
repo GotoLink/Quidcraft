@@ -47,12 +47,7 @@ public class EntityQuaffle extends Entity
     public EntityQuaffle(World world, double i, double j, double k)
     {
         this(world);
-        double x = i;
-        double y = j;
-        double z = k;
-        //float yaw = entity.rotationYaw;
-        //float pitch = entity.rotationPitch;
-        double force = 0.5;
+        
 
         //setRotation(yaw, 0);
         //double xHeading = -MathHelper.sin((yaw * 3.141593F) / 180F);

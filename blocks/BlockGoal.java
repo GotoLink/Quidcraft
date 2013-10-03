@@ -27,11 +27,13 @@ public class BlockGoal extends BlockContainer//Breakable
         super(i, Material.portal);
         this.setCreativeTab(CreativeTabs.creativeTabArray[Quidcraft.proxy.tabQuidditch]);
     }
+	@Override
 	@SideOnly(Side.CLIENT)
     public Icon getIcon(int i, int j)
     {   
          return this.icons[j==0?0:1];
     }
+	@Override
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
@@ -303,7 +305,8 @@ public class BlockGoal extends BlockContainer//Breakable
 			}
         }
     }
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         if(iblockaccess.getBlockId(i, j, k) != 0)
@@ -336,7 +339,8 @@ public class BlockGoal extends BlockContainer//Breakable
     {
         return 1;
     }
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public int getRenderBlockPass()
     {
         return 0;

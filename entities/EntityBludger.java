@@ -1,10 +1,7 @@
 package assets.quidcraft.entities;
 
-import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,9 +49,6 @@ public class EntityBludger extends EntityFlying implements IMob {
 	public EntityBludger(World world, double i, double j, double k)
     {
         this(world);
-        double x = i;
-        double y = j;
-        double z = k;
         setPosition(i,j,k);      
         prevPosX = posX;
         prevPosY = posY;
@@ -150,10 +144,10 @@ public class EntityBludger extends EntityFlying implements IMob {
 		updateEntityActionState();
 	}
 
+	@Override
 	protected void updateEntityActionState() {
 		if(worldObj.isRemote)
 			return;
-		int i=0;
 		target = this.worldObj.getClosestPlayerToEntity(this, 16F);
 
 		if (ticksSinceHit == 20) {

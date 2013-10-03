@@ -43,12 +43,14 @@ public class BlockNet extends Block
     {
         return new TileEntityGoal();
     }
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public Icon getIcon( int i, int j)
     {   
         return this.icons[j==0?0:1];
     }
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
 		this.icons = new Icon[2];
@@ -122,7 +124,8 @@ public class BlockNet extends Block
         }
         return false;
     }
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         if(iblockaccess.getBlockId(i, j, k) != 0)
@@ -160,7 +163,8 @@ public class BlockNet extends Block
     {
         return false;
     }
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public int getRenderBlockPass()
     {
         return 0;

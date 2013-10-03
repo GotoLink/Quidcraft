@@ -36,6 +36,7 @@ public class QuidcraftTickHandler implements ITickHandler
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@SuppressWarnings("unused")
 	public boolean onTickInGUI(float f, Minecraft minecraft, GuiScreen guiscreen) {
 		if ((guiscreen instanceof GuiContainerCreative)
 				&& !(lastGuiOpen instanceof GuiContainerCreative)
