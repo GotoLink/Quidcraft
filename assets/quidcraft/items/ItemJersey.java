@@ -19,13 +19,13 @@ public class ItemJersey extends ItemArmor {
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
 		if (!world.isRemote) {
-			itemstack = new ItemStack(Quidcraft.instance.Jersey[itemstack.itemID - Quidcraft.Jersey_ID - 256]);
+			itemstack = new ItemStack(Quidcraft.Jersey[itemstack.itemID - Quidcraft.Jersey_ID - 256]);
 		}
 		return itemstack;
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
-		return "quidcraft:textures/models/jersey" + Quidcraft.instance.jerseyNames[stack.itemID - Quidcraft.Jersey_ID - 256] + ".png";
+		return "quidcraft:textures/models/jersey" + Quidcraft.jerseyNames[stack.itemID - Quidcraft.Jersey_ID - 256] + ".png";
 	}
 }

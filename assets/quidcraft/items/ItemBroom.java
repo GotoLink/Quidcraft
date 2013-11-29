@@ -45,7 +45,7 @@ public class ItemBroom extends Item {
 		} else {
 			Vec3 var25 = entityplayer.getLook(1.0F);
 			boolean var26 = false;
-			List var28 = world.getEntitiesWithinAABBExcludingEntity(entityplayer,
+			List<?> var28 = world.getEntitiesWithinAABBExcludingEntity(entityplayer,
 					entityplayer.boundingBox.addCoord(var25.xCoord * var21, var25.yCoord * var21, var25.zCoord * var21).expand(1.0D, 1.0D, 1.0D));
 			int var29;
 			for (var29 = 0; var29 < var28.size(); ++var29) {

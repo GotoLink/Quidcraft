@@ -20,13 +20,13 @@ public class ItemHeadband extends ItemArmor {
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
 		if (!world.isRemote) {
-			itemstack = new ItemStack(Quidcraft.instance.Headband[itemstack.itemID - Quidcraft.Headband_ID - 256]);
+			itemstack = new ItemStack(Quidcraft.Headband[itemstack.itemID - Quidcraft.Headband_ID - 256]);
 		}
 		return itemstack;
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
-		return "quidcraft:textures/models/headband" + Quidcraft.instance.headbandNames[stack.itemID - Quidcraft.Headband_ID - 256] + ".png";
+		return "quidcraft:textures/models/headband" + Quidcraft.headbandNames[stack.itemID - Quidcraft.Headband_ID - 256] + ".png";
 	}
 }

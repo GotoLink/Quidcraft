@@ -19,7 +19,7 @@ public class QuidcraftClientProxy extends QuidcraftCommonProxy {
 	@Override
 	public void preInit() {
 		tabQuidditch = new QuidcraftCreativeTab("Quidditch").getTabIndex();
-		KeyBindingRegistry.registerKeyBinding(new QuidcraftKeyHandler(Quidcraft.instance.KEY_UP, Quidcraft.instance.KEY_DOWN));
+		KeyBindingRegistry.registerKeyBinding(new QuidcraftKeyHandler(Quidcraft.KEY_UP, Quidcraft.KEY_DOWN));
 	}
 
 	@Override

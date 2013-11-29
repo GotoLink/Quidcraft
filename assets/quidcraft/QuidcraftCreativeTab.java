@@ -18,6 +18,6 @@ public class QuidcraftCreativeTab extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getTabIconItemIndex() {
-		return Quidcraft.instance.Snitch_ID + 256;
+		return Quidcraft.Snitch_ID + 256;
 	}
 }

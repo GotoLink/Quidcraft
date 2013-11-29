@@ -258,7 +258,7 @@ public class EntityBroom extends Entity {
 			this.rotationYaw = (float) (this.rotationYaw + var14);
 			this.setRotation(this.rotationYaw, this.rotationPitch);
 			if (!worldObj.isRemote) {
-				List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(0.2D, 0.0D, 0.2D));
+				List<?> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(0.2D, 0.0D, 0.2D));
 				if (list != null && !list.isEmpty()) {
 					for (int j1 = 0; j1 < list.size(); ++j1) {
 						Entity entity = (Entity) list.get(j1);
