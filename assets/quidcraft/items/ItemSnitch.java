@@ -1,17 +1,14 @@
 package assets.quidcraft.items;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import assets.quidcraft.Quidcraft;
 import assets.quidcraft.entities.EntitySnitch;
 
 public class ItemSnitch extends Item {
-	public ItemSnitch(int i) {
-		super(i);
-		this.setCreativeTab(CreativeTabs.creativeTabArray[Quidcraft.proxy.tabQuidditch]);
+	public ItemSnitch() {
+		super();
 	}
 
 	@Override

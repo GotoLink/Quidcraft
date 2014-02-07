@@ -1,14 +1,15 @@
 package assets.quidcraft.entities;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import assets.quidcraft.Quidcraft;
 import cpw.mods.fml.relauncher.Side;
@@ -66,9 +67,9 @@ public class EntitySnitch extends EntityFlying implements IAnimals {
 			int i = MathHelper.floor_double(posX);
 			int j = MathHelper.floor_double(posY - 0.20000000298023224D - yOffset);
 			int k = MathHelper.floor_double(posZ);
-			int j1 = worldObj.getBlockId(i, j, k);
-			if (j1 > 0) {
-				worldObj.spawnParticle((new StringBuilder()).append("tilecrack_").append(j1).toString(), posX + (rand.nextFloat() - 0.5D) * width,
+			Block j1 = worldObj.func_147439_a(i, j, k);
+			if (j1 != Blocks.air) {
+				worldObj.spawnParticle((new StringBuilder()).append("blockcrack_").append(Block.func_149682_b(j1)).append("_").append(worldObj.getBlockMetadata(i,j,k)).toString(), posX + (rand.nextFloat() - 0.5D) * width,
 						boundingBox.minY + 0.10000000000000001D, posZ + (rand.nextFloat() - 0.5D) * width, -motionX * 4D, 1.5D, -motionZ * 4D);
 			}
 		}
@@ -166,8 +167,8 @@ public class EntitySnitch extends EntityFlying implements IAnimals {
 	@Override
 	public boolean interact(EntityPlayer entityplayer) {
 		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-		if (this.getDistanceToEntity(entityplayer) <= 2.5F && itemstack != null && itemstack.itemID == Quidcraft.SnitchGlove.itemID) {
-			if (entityplayer.inventory.addItemStackToInventory(new ItemStack(Quidcraft.Snitch, 1))) {
+		if (this.getDistanceToEntity(entityplayer) <= 2.5F && itemstack != null && itemstack.getItem() == Quidcraft.proxy.SnitchGlove) {
+			if (entityplayer.inventory.addItemStackToInventory(new ItemStack(Quidcraft.proxy.Snitch, 1))) {
 				entityplayer.onItemPickup(this, 1);
 				setDead();
 				return true;
@@ -179,13 +180,7 @@ public class EntitySnitch extends EntityFlying implements IAnimals {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean isInRangeToRenderVec3D(Vec3 vec3d) {
-		return true;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean isInRangeToRenderDist(double d) {
+	public boolean func_145770_h(double x, double y, double z) {
 		return true;
 	}
 

@@ -2,39 +2,36 @@ package assets.quidcraft.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import assets.quidcraft.Quidcraft;
 
 public class BlockFlag extends Block {
-	public BlockFlag(int i) {
-		super(i, Material.wood);
-		this.setCreativeTab(CreativeTabs.creativeTabArray[Quidcraft.proxy.tabQuidditch]);
+	public BlockFlag() {
+		super(Material.field_151575_d);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k) {
+	public AxisAlignedBB func_149668_a(World world, int i, int j, int k) {
 		return null;
 	}
 
 	@Override
-	public int getRenderType() {
+	public int func_149645_b() {
 		return 1;
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean func_149686_d() {
 		return false;
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l) {
-		dropBlockAsItem(world, i, j, k, l, 1);
+	public void func_149664_b(World world, int i, int j, int k, int l) {
+        func_149697_b(world, i, j, k, l, 1);
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
+	public boolean func_149662_c() {
 		return false;
 	}
 }

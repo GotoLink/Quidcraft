@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import assets.quidcraft.Quidcraft;
 import cpw.mods.fml.relauncher.Side;
@@ -67,7 +66,7 @@ public class EntityBludger extends EntityFlying implements IMob {
 		if (attacker instanceof EntityPlayer) {
 			// check that hit with bat
 			ItemStack itemstack = ((EntityPlayer) attacker).getCurrentEquippedItem();
-			if (itemstack != null && itemstack.itemID == Quidcraft.Bat.itemID) {
+			if (itemstack != null && itemstack.getItem() == Quidcraft.proxy.Bat) {
 				attackerX = attacker.posX;
 				attackerY = attacker.posY;
 				attackerZ = attacker.posZ;
@@ -161,10 +160,10 @@ public class EntityBludger extends EntityFlying implements IMob {
 	@Override
 	public boolean interact(EntityPlayer entityplayer) {
 		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-		if (itemstack != null && itemstack.itemID == Quidcraft.BludgerGlove.itemID && !worldObj.isRemote) {
+		if (itemstack != null && itemstack.getItem() == Quidcraft.proxy.BludgerGlove && !worldObj.isRemote) {
 			// entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem,
 			// new ItemStack(mod_QuidditchSMP.Bludger));
-			if (entityplayer.inventory.addItemStackToInventory(new ItemStack(Quidcraft.Bludger, 1))) {
+			if (entityplayer.inventory.addItemStackToInventory(new ItemStack(Quidcraft.proxy.Bludger, 1))) {
 				entityplayer.onItemPickup(this, 1);
 				setDead();
 				return true;
@@ -204,13 +203,7 @@ public class EntityBludger extends EntityFlying implements IMob {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean isInRangeToRenderVec3D(Vec3 vec3d) {
-		return true;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean isInRangeToRenderDist(double d) {
+	public boolean func_145770_h(double x, double y, double z) {
 		return true;
 	}
 

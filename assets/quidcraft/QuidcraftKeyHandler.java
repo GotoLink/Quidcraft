@@ -1,54 +1,42 @@
 package assets.quidcraft;
 
-import java.util.EnumSet;
-
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.InputEvent;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import assets.quidcraft.entities.EntityBroom;
-import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
-import cpw.mods.fml.common.TickType;
+import org.lwjgl.input.Keyboard;
 
-public class QuidcraftKeyHandler extends KeyHandler {
+public class QuidcraftKeyHandler{
 	Minecraft client = Minecraft.getMinecraft();
-	public static final String upDesc = "Broom Up";
-	public static final String downDesc = "Broom Down";
+	public static final String upDesc = "Up";
+	public static final String downDesc = "Down";
+    public static final String cat = "key.categories.broom";
+    public static KeyBinding up, down;
 
 	public QuidcraftKeyHandler(int upKey, int downKey) {
-		super(new KeyBinding[] { new KeyBinding(upDesc, upKey), new KeyBinding(downDesc, downKey) }, new boolean[] { false, false });
+		up = new KeyBinding("key."+upDesc, upKey, cat);
+        down = new KeyBinding("key."+downDesc, downKey, cat);
+        ClientRegistry.registerKeyBinding(up);
+        ClientRegistry.registerKeyBinding(down);
 	}
 
-	@Override
-	public String getLabel() {
-		return "Broom Keys Handler";
-	}
-
-	@Override
-	public void keyDown(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd, boolean isRepeat) {
-		if (client != null && client.thePlayer != null && tickEnd) {
+	@SubscribeEvent
+	public void keyDown(InputEvent.KeyInputEvent event) {
+		if (client != null && client.thePlayer != null) {
 			Entity ent = client.thePlayer.ridingEntity;
 			if (ent != null && ent instanceof EntityBroom) {
-				if (kb.keyDescription.equals(upDesc)) {
-					client.getNetHandler().addToSendQueue(QuidcraftPacketHandler.getPacket(2));
-				} else if (kb.keyDescription.equals(downDesc)) {
-					client.getNetHandler().addToSendQueue(QuidcraftPacketHandler.getPacket(0));
-				}
+				if (Keyboard.getEventKey() == up.func_151463_i()) {
+					Quidcraft.proxy.channel.sendToServer(QuidcraftPacketHandler.getPacket(2, Side.SERVER));
+				} else if (Keyboard.getEventKey() == down.func_151463_i()) {
+                    Quidcraft.proxy.channel.sendToServer(QuidcraftPacketHandler.getPacket(0, Side.SERVER));
+				}else if(!up.func_151470_d()&& !down.func_151470_d()){
+                    Quidcraft.proxy.channel.sendToServer(QuidcraftPacketHandler.getPacket(1, Side.SERVER));
+                }
 			}
 		}
-	}
-
-	@Override
-	public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd) {
-		if (client != null && client.thePlayer != null && tickEnd) {
-			Entity ent = client.thePlayer.ridingEntity;
-			if (ent != null && ent instanceof EntityBroom) {
-				client.getNetHandler().addToSendQueue(QuidcraftPacketHandler.getPacket(1));
-			}
-		}
-	}
-
-	@Override
-	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.CLIENT);
 	}
 }

@@ -13,8 +13,8 @@ public class TileEntityGoal extends TileEntity {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound) {
-		super.readFromNBT(nbttagcompound);
+	public void func_145839_a(NBTTagCompound nbttagcompound) {
+		super.func_145839_a(nbttagcompound);
 		goalTime = nbttagcompound.getShort("GoalTime");
 		neighborHasQuaffle = nbttagcompound.getBoolean("neighborHasQuaffle");
 		hasQuaffle = nbttagcompound.getBoolean("hasQuaffle");
@@ -26,8 +26,8 @@ public class TileEntityGoal extends TileEntity {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound) {
-		super.writeToNBT(nbttagcompound);
+	public void func_145841_b(NBTTagCompound nbttagcompound) {
+		super.func_145841_b(nbttagcompound);
 		nbttagcompound.setShort("GoalTime", (short) goalTime);
 		nbttagcompound.setBoolean("neighborHasQuaffle", neighborHasQuaffle);
 		nbttagcompound.setBoolean("hasQuaffle", hasQuaffle);
@@ -39,9 +39,9 @@ public class TileEntityGoal extends TileEntity {
 	}
 
 	@Override
-	public void updateEntity() {
-		if (!worldObj.isRemote) {
-			BlockGoal.updateGoalBlockState(!hasQuaffle && !neighborHasQuaffle, (hasQuaffle || neighborHasQuaffle), worldObj, xCoord, yCoord, zCoord);
+	public void func_145845_h() {
+		if (!field_145850_b.isRemote) {
+			BlockGoal.updateGoalBlockState(!hasQuaffle && !neighborHasQuaffle, (hasQuaffle || neighborHasQuaffle), field_145850_b, field_145851_c, field_145848_d, field_145849_e);
 			if (!hasQuaffle && !neighborHasQuaffle && goalTime > 0)
 				goalTime--;
 			if (verifyQuaffle) {

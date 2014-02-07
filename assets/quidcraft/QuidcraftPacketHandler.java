@@ -1,40 +1,30 @@
 package assets.quidcraft;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+import cpw.mods.fml.relauncher.Side;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.network.NetHandlerPlayServer;
 import assets.quidcraft.entities.EntityBroom;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
 
-public class QuidcraftPacketHandler implements IPacketHandler {
-	public static final String CHANNEL = "Broom";
+public class QuidcraftPacketHandler {
+	public static final String CHANNEL = "Quidcraft:Broom";
 
-	@Override
-	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
-		if (packet.channel.equals(CHANNEL)) {
-			this.handle(packet, player);
+	@SubscribeEvent
+	public void onServerPacket(FMLNetworkEvent.ServerCustomPacketEvent event) {
+		if (event.packet.channel().equals(CHANNEL)) {
+			this.handle(event.packet, ((NetHandlerPlayServer)event.handler).field_147369_b);
 		}
 	}
 
-	private void handle(Packet250CustomPayload packet, Player player) {
-		DataInputStream inStream = new DataInputStream(new ByteArrayInputStream(packet.data));
-		short data;
-		try {
-			data = inStream.readShort();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-		Entity ent = ((EntityPlayer) player).ridingEntity;
+	private void handle(FMLProxyPacket packet, EntityPlayer player) {
+		ByteBuf buf = packet.payload();
+		short data = buf.readShort();
+		Entity ent = player.ridingEntity;
 		if (ent != null && ent instanceof EntityBroom) {
 			((EntityBroom) ent).isGoingUp = false;
 			((EntityBroom) ent).isGoingDown = false;
@@ -45,18 +35,11 @@ public class QuidcraftPacketHandler implements IPacketHandler {
 		}
 	}
 
-	public static Packet getPacket(int i) {
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(2);
-		DataOutputStream outputStream = new DataOutputStream(bos);
-		try {
-			outputStream.writeShort(i);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = CHANNEL;
-		packet.data = bos.toByteArray();
-		packet.length = bos.size();
+	public static FMLProxyPacket getPacket(int i, Side side) {
+		ByteBuf payload = Unpooled.buffer();
+        payload.writeShort(i);
+		FMLProxyPacket packet = new FMLProxyPacket(payload, CHANNEL);
+		packet.setTarget(side);
 		return packet;
 	}
 }

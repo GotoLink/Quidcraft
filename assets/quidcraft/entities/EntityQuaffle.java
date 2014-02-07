@@ -70,8 +70,8 @@ public class EntityQuaffle extends Entity {
 			prevPosX = posX;
 			prevPosY = posY;
 			prevPosZ = posZ;
-			boolean inNet = (worldObj.getBlockMaterial(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)) == Material.portal);
-			boolean willBeInNet = (worldObj.getBlockMaterial(MathHelper.floor_double(posX + motionX), MathHelper.floor_double(posY + motionY), MathHelper.floor_double(posZ + motionZ)) == Material.portal);
+			boolean inNet = (worldObj.func_147439_a(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)).func_149688_o() == Material.field_151567_E);
+			boolean willBeInNet = (worldObj.func_147439_a(MathHelper.floor_double(posX + motionX), MathHelper.floor_double(posY + motionY), MathHelper.floor_double(posZ + motionZ)).func_149688_o() == Material.field_151567_E);
 			/*
 			 * if(inNet || willBeInNet) isInWeb = true;
 			 */
@@ -162,7 +162,7 @@ public class EntityQuaffle extends Entity {
 	@Override
 	public void onCollideWithPlayer(EntityPlayer entityplayer) {
 		if (!worldObj.isRemote) {
-			if (ticksInAir > 3 && entityplayer.inventory.addItemStackToInventory(new ItemStack(Quidcraft.Quaffle, 1))) {
+			if (ticksInAir > 3 && entityplayer.inventory.addItemStackToInventory(new ItemStack(Quidcraft.proxy.Quaffle, 1))) {
 				worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 				entityplayer.onItemPickup(this, 1);
 				setDead();

@@ -1,0 +1,29 @@
+
+tile.quidcraft:ScoreAreaFlag.name=Score Area Flag
+tile.quidcraft:Flag.name=Boundary Flag
+tile.quidcraft:QuidcraftChest.name=Quidditch Chest
+tile.quidcraft:BlockGoal.name=Net Block
+
+item.quidcraft:Headband.name=Headband
+item.quidcraft:HeadbandBeater.name=Beater Headband
+item.quidcraft:HeadbandChaser.name=Chaser Headband
+item.quidcraft:HeadbandKeeper.name=Keeper Headband
+item.quidcraft:HeadbandSeeker.name=Seeker Headband
+item.quidcraft:Jersey.name= Jersey
+item.quidcraft:JerseyRed.name=Red Jersey
+item.quidcraft:JerseyGreen.name=Green Jersey
+item.quidcraft:JerseyOrange.name=Orange Jersey
+item.quidcraft:JerseyBlue.name=Blue Jersey
+item.quidcraft:JerseyPurple.name=Purple Jersey
+item.quidcraft:JerseyYellow.name=Yellow Jersey
+item.quidcraft:Bat.name=Bat
+item.quidcraft:Bludger.name=Bludger
+item.quidcraft:BludgerGlove.name=Bludger Gloves
+item.quidcraft:Broom.name=Broom
+item.quidcraft:Quaffle.name=Quaffle
+item.quidcraft:Snitch.name=Snitch
+item.quidcraft:SnitchGlove.name=Snitch Gloves
+
+key.Up=Up
+key.Down=Down
+key.categories.broom=Broom

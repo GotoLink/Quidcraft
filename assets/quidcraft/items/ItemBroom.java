@@ -2,25 +2,21 @@ package assets.quidcraft.items;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import assets.quidcraft.Quidcraft;
 import assets.quidcraft.entities.EntityBroom;
 
 public class ItemBroom extends Item {
-	public ItemBroom(int i) {
-		super(i);
-		this.setCreativeTab(CreativeTabs.creativeTabArray[Quidcraft.proxy.tabQuidditch]);
+	public ItemBroom() {
+		super();
 	}
 
 	@Override
@@ -61,11 +57,11 @@ public class ItemBroom extends Item {
 			if (var26) {
 				return itemstack;
 			} else {
-				if (var24.typeOfHit == EnumMovingObjectType.TILE) {
+				if (var24.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
 					var29 = var24.blockX;
 					int var33 = var24.blockY;
 					int var34 = var24.blockZ;
-					if (world.getBlockId(var29, var33, var34) == Block.snow.blockID) {
+					if (world.func_147439_a(var29, var33, var34) == Blocks.snow) {
 						--var33;
 					}
 					EntityBroom var35 = new EntityBroom(world, var29 + 0.5F, var33 + 1.0F, var34 + 0.5F);

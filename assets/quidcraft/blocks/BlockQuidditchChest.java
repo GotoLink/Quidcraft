@@ -4,10 +4,11 @@ import java.util.Arrays;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.Icon;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import assets.quidcraft.Quidcraft;
 import cpw.mods.fml.relauncher.Side;
@@ -15,18 +16,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockQuidditchChest extends Block {
 	@SideOnly(Side.CLIENT)
-	private Icon[] icons;
+	private IIcon[] icons;
 
-	public BlockQuidditchChest(int i) {
-		super(i, Material.wood);
-		this.setCreativeTab(CreativeTabs.creativeTabArray[Quidcraft.proxy.tabQuidditch]);
+	public BlockQuidditchChest() {
+		super(Material.field_151575_d);
 	}
 
-	public void fillWithBlocks(World world, int i1, int i2, int j1, int j2, int k1, int k2, int material) {
+	public void fillWithBlocks(World world, int i1, int i2, int j1, int j2, int k1, int k2, Block material) {
 		for (int i = i1; i <= i2; i++) {
 			for (int j = j1; j <= j2; j++) {
 				for (int k = k1; k <= k2; k++) {
-					world.setBlock(i, j, k, material);
+					world.func_147449_b(i, j, k, material);
 				}
 			}
 		}
@@ -34,29 +34,29 @@ public class BlockQuidditchChest extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int i, int j) {
+	public IIcon func_149691_a(int i, int j) {
 		return i < 2 ? this.icons[0] : this.icons[1];
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int f, float f1, float f2, float f3) {
+	public boolean func_149727_a(World world, int i, int j, int k, EntityPlayer entityplayer, int f, float f1, float f2, float f3) {
 		if (world.isRemote) {
 			return true;
 		}
 		int l = world.getBlockMetadata(i, j, k);
-		int cobblestone = Block.cobblestone.blockID;
-		int grass = Block.grass.blockID;
-		int sand = Block.sand.blockID;
-		int fence = Block.fence.blockID;
-		int plank = Block.planks.blockID;
-		int net = Quidcraft.BlockGoal.blockID;
-		int[] blocks = new int[412794];
+		Block cobblestone = Blocks.cobblestone;
+		Block grass = Blocks.grass;
+		Block sand = Blocks.sand;
+		Block fence = Blocks.fence;
+		Block plank = Blocks.planks;
+		Block net = Quidcraft.proxy.BlockGoal;
+		Block[] blocks = new Block[412794];
 		//if(l == 1){
 		int currentBlock = 0;
 		for (int x = -76; x <= 76; x++) {
 			for (int z = -35; z <= 35; z++) {
 				for (int y = -2; y <= 35; y++) {
-					blocks[currentBlock] = world.getBlockId(i + x, j + y, k + z);
+					blocks[currentBlock] = world.func_147439_a(i + x, j + y, k + z);
 					//System.out.println(world.getBlockId(i+x,j+y,k+z));
 					//outputPitch += " " + world.getBlockId(i+x,j+y,k+z);
 					currentBlock++;
@@ -165,8 +165,8 @@ public class BlockQuidditchChest extends Block {
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l) {
-		dropBlockAsItem(world, i, j, k, l, 1);
+	public void func_149664_b(World world, int i, int j, int k, int l) {
+        func_149697_b(world, i, j, k, l, 1);
 	}
 
 	/*
@@ -174,8 +174,8 @@ public class BlockQuidditchChest extends Block {
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		this.icons = new Icon[2];
+	public void func_149651_a(IIconRegister par1IconRegister) {
+		this.icons = new IIcon[2];
 		this.icons[0] = par1IconRegister.registerIcon("quidcraft:ChestTop");
 		this.icons[1] = par1IconRegister.registerIcon("quidcraft:ChestSide");
 	}

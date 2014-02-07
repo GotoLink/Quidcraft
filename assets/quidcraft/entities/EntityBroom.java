@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -73,7 +74,7 @@ public class EntityBroom extends Entity {
 				if (this.riddenByEntity != null) {
 					this.riddenByEntity.mountEntity(this);
 				}
-				this.dropItemWithOffset(Quidcraft.Broom.itemID, 1, 0.0F);
+				this.func_145778_a(Quidcraft.proxy.Broom, 1, 0.0F);
 				this.setDead();
 			}
 			return true;
@@ -237,8 +238,8 @@ public class EntityBroom extends Entity {
 			if (this.isCollidedHorizontally && d1 > 1.0D) {
 				if (!this.worldObj.isRemote) {
 					this.setDead();
-					this.dropItemWithOffset(Item.wheat.itemID, 1, 0.0F);
-					this.dropItemWithOffset(Item.stick.itemID, 2, 0.0F);
+					this.func_145778_a(Items.wheat, 1, 0.0F);
+					this.func_145778_a(Items.stick, 2, 0.0F);
 				}
 			}
 			this.rotationPitch = 0.0F;

@@ -12,14 +12,16 @@ import assets.quidcraft.renderers.RenderBludger;
 import assets.quidcraft.renderers.RenderBroom;
 import assets.quidcraft.renderers.RenderQuaffle;
 import assets.quidcraft.renderers.RenderSnitch;
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import org.lwjgl.input.Keyboard;
 
 public class QuidcraftClientProxy extends QuidcraftCommonProxy {
+    public static int KEY_UP = Keyboard.KEY_NUMPAD8, KEY_DOWN = Keyboard.KEY_NUMPAD2;
 	@Override
 	public void preInit() {
-		tabQuidditch = new QuidcraftCreativeTab("Quidditch").getTabIndex();
-		KeyBindingRegistry.registerKeyBinding(new QuidcraftKeyHandler(Quidcraft.KEY_UP, Quidcraft.KEY_DOWN));
+        super.preInit();
+		FMLCommonHandler.instance().bus().register(new QuidcraftKeyHandler(KEY_UP, KEY_DOWN));
 	}
 
 	@Override

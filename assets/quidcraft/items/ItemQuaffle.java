@@ -1,17 +1,14 @@
 package assets.quidcraft.items;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import assets.quidcraft.Quidcraft;
 import assets.quidcraft.entities.EntityQuaffle;
 
 public class ItemQuaffle extends Item {
-	public ItemQuaffle(int i) {
-		super(i);
-		this.setCreativeTab(CreativeTabs.creativeTabArray[Quidcraft.proxy.tabQuidditch]);
+	public ItemQuaffle() {
+		super();
 	}
 
 	@Override
