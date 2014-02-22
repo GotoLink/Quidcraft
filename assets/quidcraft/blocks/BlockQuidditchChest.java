@@ -19,14 +19,14 @@ public class BlockQuidditchChest extends Block {
 	private IIcon[] icons;
 
 	public BlockQuidditchChest() {
-		super(Material.field_151575_d);
+		super(Material.wood);
 	}
 
 	public void fillWithBlocks(World world, int i1, int i2, int j1, int j2, int k1, int k2, Block material) {
 		for (int i = i1; i <= i2; i++) {
 			for (int j = j1; j <= j2; j++) {
 				for (int k = k1; k <= k2; k++) {
-					world.func_147449_b(i, j, k, material);
+					world.setBlock(i, j, k, material);
 				}
 			}
 		}
@@ -34,12 +34,12 @@ public class BlockQuidditchChest extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon func_149691_a(int i, int j) {
+	public IIcon getIcon(int i, int j) {
 		return i < 2 ? this.icons[0] : this.icons[1];
 	}
 
 	@Override
-	public boolean func_149727_a(World world, int i, int j, int k, EntityPlayer entityplayer, int f, float f1, float f2, float f3) {
+	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int f, float f1, float f2, float f3) {
 		if (world.isRemote) {
 			return true;
 		}
@@ -56,7 +56,7 @@ public class BlockQuidditchChest extends Block {
 		for (int x = -76; x <= 76; x++) {
 			for (int z = -35; z <= 35; z++) {
 				for (int y = -2; y <= 35; y++) {
-					blocks[currentBlock] = world.func_147439_a(i + x, j + y, k + z);
+					blocks[currentBlock] = world.getBlock(i + x, j + y, k + z);
 					//System.out.println(world.getBlockId(i+x,j+y,k+z));
 					//outputPitch += " " + world.getBlockId(i+x,j+y,k+z);
 					currentBlock++;
@@ -165,8 +165,8 @@ public class BlockQuidditchChest extends Block {
 	}
 
 	@Override
-	public void func_149664_b(World world, int i, int j, int k, int l) {
-        func_149697_b(world, i, j, k, l, 1);
+	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l) {
+        dropBlockAsItem(world, i, j, k, l, 1);
 	}
 
 	/*
@@ -174,7 +174,7 @@ public class BlockQuidditchChest extends Block {
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_149651_a(IIconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.icons = new IIcon[2];
 		this.icons[0] = par1IconRegister.registerIcon("quidcraft:ChestTop");
 		this.icons[1] = par1IconRegister.registerIcon("quidcraft:ChestSide");

@@ -70,8 +70,8 @@ public class EntityQuaffle extends Entity {
 			prevPosX = posX;
 			prevPosY = posY;
 			prevPosZ = posZ;
-			boolean inNet = (worldObj.func_147439_a(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)).func_149688_o() == Material.field_151567_E);
-			boolean willBeInNet = (worldObj.func_147439_a(MathHelper.floor_double(posX + motionX), MathHelper.floor_double(posY + motionY), MathHelper.floor_double(posZ + motionZ)).func_149688_o() == Material.field_151567_E);
+			boolean inNet = (worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)).getMaterial() == Material.portal);
+			boolean willBeInNet = (worldObj.getBlock(MathHelper.floor_double(posX + motionX), MathHelper.floor_double(posY + motionY), MathHelper.floor_double(posZ + motionZ)).getMaterial() == Material.portal);
 			/*
 			 * if(inNet || willBeInNet) isInWeb = true;
 			 */

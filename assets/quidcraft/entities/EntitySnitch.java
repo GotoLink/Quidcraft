@@ -48,7 +48,7 @@ public class EntitySnitch extends EntityFlying implements IAnimals {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(speedFactor);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(speedFactor);
 	}
 
 	@Override
@@ -67,9 +67,9 @@ public class EntitySnitch extends EntityFlying implements IAnimals {
 			int i = MathHelper.floor_double(posX);
 			int j = MathHelper.floor_double(posY - 0.20000000298023224D - yOffset);
 			int k = MathHelper.floor_double(posZ);
-			Block j1 = worldObj.func_147439_a(i, j, k);
+			Block j1 = worldObj.getBlock(i, j, k);
 			if (j1 != Blocks.air) {
-				worldObj.spawnParticle((new StringBuilder()).append("blockcrack_").append(Block.func_149682_b(j1)).append("_").append(worldObj.getBlockMetadata(i,j,k)).toString(), posX + (rand.nextFloat() - 0.5D) * width,
+				worldObj.spawnParticle((new StringBuilder()).append("blockcrack_").append(Block.getIdFromBlock(j1)).append("_").append(worldObj.getBlockMetadata(i,j,k)).toString(), posX + (rand.nextFloat() - 0.5D) * width,
 						boundingBox.minY + 0.10000000000000001D, posZ + (rand.nextFloat() - 0.5D) * width, -motionX * 4D, 1.5D, -motionZ * 4D);
 			}
 		}
@@ -180,7 +180,7 @@ public class EntitySnitch extends EntityFlying implements IAnimals {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean func_145770_h(double x, double y, double z) {
+	public boolean isInRangeToRender3d(double x, double y, double z) {
 		return true;
 	}
 

@@ -35,7 +35,7 @@ public class ItemBroom extends Item {
 		float var20 = var14 * var16;
 		double var21 = 5.0D;
 		Vec3 var23 = var13.addVector(var18 * var21, var17 * var21, var20 * var21);
-		MovingObjectPosition var24 = world.clip(var13, var23, true);
+		MovingObjectPosition var24 = world.rayTraceBlocks(var13, var23, true);
 		if (var24 == null) {
 			return itemstack;
 		} else {
@@ -61,7 +61,7 @@ public class ItemBroom extends Item {
 					var29 = var24.blockX;
 					int var33 = var24.blockY;
 					int var34 = var24.blockZ;
-					if (world.func_147439_a(var29, var33, var34) == Blocks.snow) {
+					if (world.getBlock(var29, var33, var34) == Blocks.snow) {
 						--var33;
 					}
 					EntityBroom var35 = new EntityBroom(world, var29 + 0.5F, var33 + 1.0F, var34 + 0.5F);

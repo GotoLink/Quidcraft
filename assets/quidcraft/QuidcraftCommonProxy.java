@@ -82,21 +82,21 @@ public class QuidcraftCommonProxy {
         }
         GameRegistry.addRecipe(new ItemStack(Headband[0]), "ccc", Character.valueOf('c'), Blocks.wool);
 		/* Goal Block */
-        BlockGoal = new BlockGoal().func_149711_c(2.5F).func_149672_a(Block.field_149775_l).func_149663_c("quidcraft:BlockGoal").func_149647_a(tabQuidditch);
+        BlockGoal = new BlockGoal().setHardness(2.5F).setStepSound(Block.soundTypeCloth).setBlockName("quidcraft:BlockGoal").setCreativeTab(tabQuidditch);
         GameRegistry.registerBlock(BlockGoal, "Net Block");
         GameRegistry.addRecipe(new ItemStack(BlockGoal, 5), "c c", " c ", "c c", Character.valueOf('c'), Blocks.wool);
         GameRegistry.registerTileEntity(TileEntityGoal.class, "GoalTile");
 		/* Quidditch Chest */
-        QuidditchChest = new BlockQuidditchChest().func_149711_c(2.5F).func_149672_a(Block.field_149766_f).func_149663_c("quidcraft:QuidcraftChest").func_149647_a(tabQuidditch);
+        QuidditchChest = new BlockQuidditchChest().setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("quidcraft:QuidcraftChest").setCreativeTab(tabQuidditch);
         GameRegistry.registerBlock(QuidditchChest, "Quidditch Chest");
         GameRegistry.addRecipe(new ItemStack(QuidditchChest), " q ", "bcb", " s ", Character.valueOf('q'), Quaffle, Character.valueOf('b'), Bludger, Character.valueOf('s'), Snitch,
                 Character.valueOf('c'), Blocks.chest);
 		/* Boundary Flag */
-        BoundaryFlag = new BlockFlag().func_149711_c(2.5F).func_149672_a(Block.field_149766_f).func_149663_c("quidcraft:Flag").func_149658_d("quidcraft:Flag").func_149647_a(tabQuidditch);
+        BoundaryFlag = new BlockFlag().setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("quidcraft:Flag").setBlockTextureName("quidcraft:Flag").setCreativeTab(tabQuidditch);
         GameRegistry.registerBlock(BoundaryFlag, "Boundary Flag");
         GameRegistry.addRecipe(new ItemStack(BoundaryFlag), "wws", "wws", "  s", Character.valueOf('w'), Blocks.wool, Character.valueOf('s'), Items.stick);
 		/* Score Area Flag */
-        ScoreAreaFlag = new BlockFlag().func_149711_c(2.5F).func_149672_a(Block.field_149766_f).func_149663_c("quidcraft:ScoreAreaFlag").func_149658_d("quidcraft:ScoreAreaFlag").func_149647_a(tabQuidditch);
+        ScoreAreaFlag = new BlockFlag().setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("quidcraft:ScoreAreaFlag").setBlockTextureName("quidcraft:ScoreAreaFlag").setCreativeTab(tabQuidditch);
         GameRegistry.registerBlock(ScoreAreaFlag, "Score Area Flag");
         GameRegistry.addShapelessRecipe(new ItemStack(ScoreAreaFlag), BoundaryFlag, new ItemStack(Items.dye, 1, 1));
         GameRegistry.addShapelessRecipe(new ItemStack(BoundaryFlag), ScoreAreaFlag, new ItemStack(Items.dye, 1, 15));

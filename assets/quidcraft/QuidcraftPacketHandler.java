@@ -17,7 +17,7 @@ public class QuidcraftPacketHandler {
 	@SubscribeEvent
 	public void onServerPacket(FMLNetworkEvent.ServerCustomPacketEvent event) {
 		if (event.packet.channel().equals(CHANNEL)) {
-			this.handle(event.packet, ((NetHandlerPlayServer)event.handler).field_147369_b);
+			this.handle(event.packet, ((NetHandlerPlayServer)event.handler).playerEntity);
 		}
 	}
 

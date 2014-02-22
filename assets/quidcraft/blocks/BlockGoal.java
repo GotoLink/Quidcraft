@@ -3,10 +3,8 @@ package assets.quidcraft.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -21,44 +19,49 @@ import assets.quidcraft.entities.TileEntityGoal;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockGoal extends BlockContainer//Breakable
+public class BlockGoal extends Block//Breakable
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
 	public BlockGoal() {
-		super(Material.field_151567_E);
+		super(Material.portal);
 	}
+    
+    @Override
+    public boolean hasTileEntity(int i){
+        return true;
+    }
 
 	@Override
-	public TileEntity func_149915_a(World var1, int i) {
+	public TileEntity createTileEntity(World var1, int i) {
 		return new TileEntityGoal();
 	}
 
 	@Override
-	public AxisAlignedBB func_149668_a(World world, int i, int j, int k) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k) {
 		return null;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon func_149691_a(int i, int j) {
+	public IIcon getIcon(int i, int j) {
 		return this.icons[j == 0 ? 0 : 1];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int func_149701_w() {
+	public int getRenderBlockPass() {
 		return 0;
 	}
 
 	@Override
-	public Item func_149650_a(int i, Random random, int j) {
-		return Item.func_150898_a(Quidcraft.proxy.BlockGoal);
+	public Item getItemDropped(int i, Random random, int j) {
+		return Item.getItemFromBlock(Quidcraft.proxy.BlockGoal);
 	}
 
 	public boolean isBlockAt(IBlockAccess iblockaccess, int i, int j, int k) {
-		Block l = iblockaccess.func_147439_a(i, j, k);
+		Block l = iblockaccess.getBlock(i, j, k);
 		if (l != Blocks.air) {
 			return true;
 		}
@@ -66,20 +69,20 @@ public class BlockGoal extends BlockContainer//Breakable
 	}
 
 	@Override
-	public boolean func_149686_d() {
+	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
 	@Override
-	public void func_149670_a(World world, int i, int j, int k, Entity entity) {
+	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
 		if (!world.isRemote) {
-			TileEntityGoal tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+			TileEntityGoal tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 			//world.removeBlockTileEntity(i, j, k);
 			if (entity instanceof EntityQuaffle) {
-				tileentitygoal.func_145829_t();
+				tileentitygoal.validate();
 				tileentitygoal.setHasQuaffle(true);
 				//notify neighbors
-				world.func_147459_d(i, j, k, this);
+				world.notifyBlocksOfNeighborChange(i, j, k, this);
 				entity.motionX = 0F;
 				entity.motionY = 0F;
 				entity.motionZ = 0F;
@@ -88,7 +91,7 @@ public class BlockGoal extends BlockContainer//Breakable
 	}
 
 	@Override
-	public void func_149695_a(World world, int i, int j, int k, Block l) {
+	public void onNeighborBlockChange(World world, int i, int j, int k, Block l) {
 		//System.out.println("neighbor updated "+i+" "+j+" "+k);
 		/*
 		 * TileEntityGoal tileentitygoal =
@@ -97,17 +100,17 @@ public class BlockGoal extends BlockContainer//Breakable
 		 * tileentitygoal.setGoalTime(tileentitygoal.goalTime); }
 		 */
 		if (!world.isRemote) {
-			TileEntityGoal tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+			TileEntityGoal tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 			if (tileentitygoal != null) {
 				if (tileentitygoal.hasQuaffle)
 					return;
 			}
-			if (world.func_147439_a(i - 1, j, k) == Quidcraft.proxy.BlockGoal) {
-				tileentitygoal = (TileEntityGoal) world.func_147438_o(i - 1, j, k);
+			if (world.getBlock(i - 1, j, k) == Quidcraft.proxy.BlockGoal) {
+				tileentitygoal = (TileEntityGoal) world.getTileEntity(i - 1, j, k);
 				if (tileentitygoal != null) {
 					//if neighbor has quaffle, set neighborhasquaffle
 					if (tileentitygoal.hasQuaffle) {
-						tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+						tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 						if (tileentitygoal != null) {
 							tileentitygoal.setNeighborHasQuaffle(true);
 							tileentitygoal.setNeighborPosition(i - 1, j, k);
@@ -116,13 +119,13 @@ public class BlockGoal extends BlockContainer//Breakable
 					}
 					//if neighbors neighbor has quaffle, verify then set neighborhasquaffle
 					else if (tileentitygoal.neighborHasQuaffle) {
-						TileEntityGoal tileentitygoal2 = (TileEntityGoal) world.func_147438_o(tileentitygoal.neighborX, tileentitygoal.neighborY, tileentitygoal.neighborZ);
+						TileEntityGoal tileentitygoal2 = (TileEntityGoal) world.getTileEntity(tileentitygoal.neighborX, tileentitygoal.neighborY, tileentitygoal.neighborZ);
 						if (tileentitygoal2 != null) {
 							if (tileentitygoal2.hasQuaffle) {
-								tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+								tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 								if (tileentitygoal != null) {
 									tileentitygoal.setNeighborHasQuaffle(true);
-									tileentitygoal.setNeighborPosition(tileentitygoal2.field_145851_c, tileentitygoal2.field_145848_d, tileentitygoal2.field_145849_e);
+									tileentitygoal.setNeighborPosition(tileentitygoal2.xCoord, tileentitygoal2.yCoord, tileentitygoal2.zCoord);
 								}
 								return;
 							}
@@ -130,12 +133,12 @@ public class BlockGoal extends BlockContainer//Breakable
 					}
 				}
 			}
-			if (world.func_147439_a(i + 1, j, k) == Quidcraft.proxy.BlockGoal) {
-				tileentitygoal = (TileEntityGoal) world.func_147438_o(i + 1, j, k);
+			if (world.getBlock(i + 1, j, k) == Quidcraft.proxy.BlockGoal) {
+				tileentitygoal = (TileEntityGoal) world.getTileEntity(i + 1, j, k);
 				if (tileentitygoal != null) {
 					//if neighbor has quaffle, set neighborhasquaffle
 					if (tileentitygoal.hasQuaffle) {
-						tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+						tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 						if (tileentitygoal != null) {
 							tileentitygoal.setNeighborHasQuaffle(true);
 							tileentitygoal.setNeighborPosition(i + 1, j, k);
@@ -144,13 +147,13 @@ public class BlockGoal extends BlockContainer//Breakable
 					}
 					//if neighbors neighbor has quaffle, verify then set neighborhasquaffle
 					else if (tileentitygoal.neighborHasQuaffle) {
-						TileEntityGoal tileentitygoal2 = (TileEntityGoal) world.func_147438_o(tileentitygoal.neighborX, tileentitygoal.neighborY, tileentitygoal.neighborZ);
+						TileEntityGoal tileentitygoal2 = (TileEntityGoal) world.getTileEntity(tileentitygoal.neighborX, tileentitygoal.neighborY, tileentitygoal.neighborZ);
 						if (tileentitygoal2 != null) {
 							if (tileentitygoal2.hasQuaffle) {
-								tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+								tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 								if (tileentitygoal != null) {
 									tileentitygoal.setNeighborHasQuaffle(true);
-									tileentitygoal.setNeighborPosition(tileentitygoal2.field_145851_c, tileentitygoal2.field_145848_d, tileentitygoal2.field_145849_e);
+									tileentitygoal.setNeighborPosition(tileentitygoal2.xCoord, tileentitygoal2.yCoord, tileentitygoal2.zCoord);
 								}
 								return;
 							}
@@ -158,12 +161,12 @@ public class BlockGoal extends BlockContainer//Breakable
 					}
 				}
 			}
-			if (world.func_147439_a(i, j - 1, k) == Quidcraft.proxy.BlockGoal) {
-				tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j - 1, k);
+			if (world.getBlock(i, j - 1, k) == Quidcraft.proxy.BlockGoal) {
+				tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j - 1, k);
 				if (tileentitygoal != null) {
 					//if neighbor has quaffle, set neighborhasquaffle
 					if (tileentitygoal.hasQuaffle) {
-						tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+						tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 						if (tileentitygoal != null) {
 							tileentitygoal.setNeighborHasQuaffle(true);
 							tileentitygoal.setNeighborPosition(i, j - 1, k);
@@ -172,13 +175,13 @@ public class BlockGoal extends BlockContainer//Breakable
 					}
 					//if neighbors neighbor has quaffle, verify then set neighborhasquaffle
 					else if (tileentitygoal.neighborHasQuaffle) {
-						TileEntityGoal tileentitygoal2 = (TileEntityGoal) world.func_147438_o(tileentitygoal.neighborX, tileentitygoal.neighborY, tileentitygoal.neighborZ);
+						TileEntityGoal tileentitygoal2 = (TileEntityGoal) world.getTileEntity(tileentitygoal.neighborX, tileentitygoal.neighborY, tileentitygoal.neighborZ);
 						if (tileentitygoal2 != null) {
 							if (tileentitygoal2.hasQuaffle) {
-								tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+								tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 								if (tileentitygoal != null) {
 									tileentitygoal.setNeighborHasQuaffle(true);
-									tileentitygoal.setNeighborPosition(tileentitygoal2.field_145851_c, tileentitygoal2.field_145848_d, tileentitygoal2.field_145849_e);
+									tileentitygoal.setNeighborPosition(tileentitygoal2.xCoord, tileentitygoal2.yCoord, tileentitygoal2.zCoord);
 								}
 								return;
 							}
@@ -186,12 +189,12 @@ public class BlockGoal extends BlockContainer//Breakable
 					}
 				}
 			}
-			if (world.func_147439_a(i, j + 1, k) == Quidcraft.proxy.BlockGoal) {
-				tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j + 1, k);
+			if (world.getBlock(i, j + 1, k) == Quidcraft.proxy.BlockGoal) {
+				tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j + 1, k);
 				if (tileentitygoal != null) {
 					//if neighbor has quaffle, set neighborhasquaffle
 					if (tileentitygoal.hasQuaffle) {
-						tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+						tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 						if (tileentitygoal != null) {
 							tileentitygoal.setNeighborHasQuaffle(true);
 							tileentitygoal.setNeighborPosition(i, j + 1, k);
@@ -200,13 +203,13 @@ public class BlockGoal extends BlockContainer//Breakable
 					}
 					//if neighbors neighbor has quaffle, verify then set neighborhasquaffle
 					else if (tileentitygoal.neighborHasQuaffle) {
-						TileEntityGoal tileentitygoal2 = (TileEntityGoal) world.func_147438_o(tileentitygoal.neighborX, tileentitygoal.neighborY, tileentitygoal.neighborZ);
+						TileEntityGoal tileentitygoal2 = (TileEntityGoal) world.getTileEntity(tileentitygoal.neighborX, tileentitygoal.neighborY, tileentitygoal.neighborZ);
 						if (tileentitygoal2 != null) {
 							if (tileentitygoal2.hasQuaffle) {
-								tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+								tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 								if (tileentitygoal != null) {
 									tileentitygoal.setNeighborHasQuaffle(true);
-									tileentitygoal.setNeighborPosition(tileentitygoal2.field_145851_c, tileentitygoal2.field_145848_d, tileentitygoal2.field_145849_e);
+									tileentitygoal.setNeighborPosition(tileentitygoal2.xCoord, tileentitygoal2.yCoord, tileentitygoal2.zCoord);
 								}
 								return;
 							}
@@ -214,12 +217,12 @@ public class BlockGoal extends BlockContainer//Breakable
 					}
 				}
 			}
-			if (world.func_147439_a(i, j, k - 1) == Quidcraft.proxy.BlockGoal) {
-				tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k - 1);
+			if (world.getBlock(i, j, k - 1) == Quidcraft.proxy.BlockGoal) {
+				tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k - 1);
 				if (tileentitygoal != null) {
 					//if neighbor has quaffle, set neighborhasquaffle
 					if (tileentitygoal.hasQuaffle) {
-						tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+						tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 						if (tileentitygoal != null) {
 							tileentitygoal.setNeighborHasQuaffle(true);
 							tileentitygoal.setNeighborPosition(i, j, k - 1);
@@ -228,13 +231,13 @@ public class BlockGoal extends BlockContainer//Breakable
 					}
 					//if neighbors neighbor has quaffle, verify then set neighborhasquaffle
 					else if (tileentitygoal.neighborHasQuaffle) {
-						TileEntityGoal tileentitygoal2 = (TileEntityGoal) world.func_147438_o(tileentitygoal.neighborX, tileentitygoal.neighborY, tileentitygoal.neighborZ);
+						TileEntityGoal tileentitygoal2 = (TileEntityGoal) world.getTileEntity(tileentitygoal.neighborX, tileentitygoal.neighborY, tileentitygoal.neighborZ);
 						if (tileentitygoal2 != null) {
 							if (tileentitygoal2.hasQuaffle) {
-								tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+								tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 								if (tileentitygoal != null) {
 									tileentitygoal.setNeighborHasQuaffle(true);
-									tileentitygoal.setNeighborPosition(tileentitygoal2.field_145851_c, tileentitygoal2.field_145848_d, tileentitygoal2.field_145849_e);
+									tileentitygoal.setNeighborPosition(tileentitygoal2.xCoord, tileentitygoal2.yCoord, tileentitygoal2.zCoord);
 								}
 								return;
 							}
@@ -242,12 +245,12 @@ public class BlockGoal extends BlockContainer//Breakable
 					}
 				}
 			}
-			if (world.func_147439_a(i, j, k + 1) == Quidcraft.proxy.BlockGoal) {
-				tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k + 1);
+			if (world.getBlock(i, j, k + 1) == Quidcraft.proxy.BlockGoal) {
+				tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k + 1);
 				if (tileentitygoal != null) {
 					//if neighbor has quaffle, set neighborhasquaffle
 					if (tileentitygoal.hasQuaffle) {
-						tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+						tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 						if (tileentitygoal != null) {
 							tileentitygoal.setNeighborHasQuaffle(true);
 							tileentitygoal.setNeighborPosition(i, j, k + 1);
@@ -256,13 +259,13 @@ public class BlockGoal extends BlockContainer//Breakable
 					}
 					//if neighbors neighbor has quaffle, verify then set neighborhasquaffle
 					else if (tileentitygoal.neighborHasQuaffle) {
-						TileEntityGoal tileentitygoal2 = (TileEntityGoal) world.func_147438_o(tileentitygoal.neighborX, tileentitygoal.neighborY, tileentitygoal.neighborZ);
+						TileEntityGoal tileentitygoal2 = (TileEntityGoal) world.getTileEntity(tileentitygoal.neighborX, tileentitygoal.neighborY, tileentitygoal.neighborZ);
 						if (tileentitygoal2 != null) {
 							if (tileentitygoal2.hasQuaffle) {
-								tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+								tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 								if (tileentitygoal != null) {
 									tileentitygoal.setNeighborHasQuaffle(true);
-									tileentitygoal.setNeighborPosition(tileentitygoal2.field_145851_c, tileentitygoal2.field_145848_d, tileentitygoal2.field_145849_e);
+									tileentitygoal.setNeighborPosition(tileentitygoal2.xCoord, tileentitygoal2.yCoord, tileentitygoal2.zCoord);
 								}
 								return;
 							}
@@ -271,7 +274,7 @@ public class BlockGoal extends BlockContainer//Breakable
 				}
 			}
 			//otherwise, set both false
-			tileentitygoal = (TileEntityGoal) world.func_147438_o(i, j, k);
+			tileentitygoal = (TileEntityGoal) world.getTileEntity(i, j, k);
 			if (tileentitygoal != null) {
 				tileentitygoal.setNeighborHasQuaffle(false);
 				tileentitygoal.setHasQuaffle(false);
@@ -281,19 +284,19 @@ public class BlockGoal extends BlockContainer//Breakable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_149651_a(IIconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.icons = new IIcon[2];
 		this.icons[0] = par1IconRegister.registerIcon("quidcraft:GoalBlock");
 		this.icons[1] = par1IconRegister.registerIcon("quidcraft:GoalBlockScore");
 	}
 
 	@Override
-	public boolean func_149662_c() {
+	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	public void func_149719_a(IBlockAccess iblockaccess, int i, int j, int k) {
+	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i, int j, int k) {
 		boolean flag = isBlockAt(iblockaccess, i, j, k - 1);
 		boolean flag1 = isBlockAt(iblockaccess, i, j, k + 1);
 		boolean flag2 = isBlockAt(iblockaccess, i - 1, j, k);
@@ -324,13 +327,13 @@ public class BlockGoal extends BlockContainer//Breakable
 		if (flag5) {
 			f5 = 1.0F;
 		}
-        func_149676_a(f, f4, f2, f1, f5, f3);
+        setBlockBounds(f, f4, f2, f1, f5, f3);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean func_149646_a(IBlockAccess iblockaccess, int i, int j, int k, int l) {
-		if (iblockaccess.func_147439_a(i, j, k) != Blocks.air) {
+	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l) {
+		if (iblockaccess.getBlock(i, j, k) != Blocks.air) {
 			return false;
 		}
 		/*
@@ -353,10 +356,10 @@ public class BlockGoal extends BlockContainer//Breakable
 		int meta = world.getBlockMetadata(i, j, k);
 		if (flag1 && meta == 1) {
 			world.setBlockMetadataWithNotify(i, j, k, 0, 3);
-			world.func_147471_g(i, j, k);
+			world.markBlockForUpdate(i, j, k);
 		} else if (flag2 && meta == 0) {
 			world.setBlockMetadataWithNotify(i, j, k, 1, 3);
-			world.func_147471_g(i, j, k);
+			world.markBlockForUpdate(i, j, k);
 		}
 	}
 }

@@ -57,7 +57,7 @@ public class EntityBludger extends EntityFlying implements IMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(speedFactor);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(speedFactor);
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public class EntityBludger extends EntityFlying implements IMob {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean func_145770_h(double x, double y, double z) {
+	public boolean isInRangeToRender3d(double x, double y, double z) {
 		return true;
 	}
 

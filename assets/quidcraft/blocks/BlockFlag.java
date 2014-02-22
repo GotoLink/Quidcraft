@@ -7,31 +7,31 @@ import net.minecraft.world.World;
 
 public class BlockFlag extends Block {
 	public BlockFlag() {
-		super(Material.field_151575_d);
+		super(Material.wood);
 	}
 
 	@Override
-	public AxisAlignedBB func_149668_a(World world, int i, int j, int k) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k) {
 		return null;
 	}
 
 	@Override
-	public int func_149645_b() {
+	public int getRenderType() {
 		return 1;
 	}
 
 	@Override
-	public boolean func_149686_d() {
+	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
 	@Override
-	public void func_149664_b(World world, int i, int j, int k, int l) {
-        func_149697_b(world, i, j, k, l, 1);
+	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l) {
+        dropBlockAsItem(world, i, j, k, l, 1);
 	}
 
 	@Override
-	public boolean func_149662_c() {
+	public boolean isOpaqueCube() {
 		return false;
 	}
 }

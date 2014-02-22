@@ -29,11 +29,11 @@ public class QuidcraftKeyHandler{
 		if (client != null && client.thePlayer != null) {
 			Entity ent = client.thePlayer.ridingEntity;
 			if (ent != null && ent instanceof EntityBroom) {
-				if (Keyboard.getEventKey() == up.func_151463_i()) {
+				if (Keyboard.getEventKey() == up.getKeyCode()) {
 					Quidcraft.proxy.channel.sendToServer(QuidcraftPacketHandler.getPacket(2, Side.SERVER));
-				} else if (Keyboard.getEventKey() == down.func_151463_i()) {
+				} else if (Keyboard.getEventKey() == down.getKeyCode()) {
                     Quidcraft.proxy.channel.sendToServer(QuidcraftPacketHandler.getPacket(0, Side.SERVER));
-				}else if(!up.func_151470_d()&& !down.func_151470_d()){
+				}else if(!up.getIsKeyPressed()&& !down.getIsKeyPressed()){
                     Quidcraft.proxy.channel.sendToServer(QuidcraftPacketHandler.getPacket(1, Side.SERVER));
                 }
 			}
