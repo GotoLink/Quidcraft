@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -28,13 +27,11 @@ public class EntityBroom extends Entity {
 	private double velocityY;
 	@SideOnly(Side.CLIENT)
 	private double velocityZ;
-	private boolean isEmpty;
 
 	public EntityBroom(World world) {
 		super(world);
 		this.preventEntitySpawning = true;
 		this.setSize(1.3F, 0.6F);
-		this.isEmpty = true;
 		this.yOffset = this.height / 2.0F;
 	}
 
@@ -85,18 +82,7 @@ public class EntityBroom extends Entity {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void setPositionAndRotation2(double d, double d1, double d2, float f, float f1, int i) {
-		if (this.isEmpty) {
-			this.broomPosRotationIncrements = i + 5;
-		} else {
-			double d3 = d - this.posX;
-			double d4 = d1 - this.posY;
-			double d5 = d2 - this.posZ;
-			double d6 = d3 * d3 + d4 * d4 + d5 * d5;
-			if (d6 <= 1.0D) {
-				return;
-			}
-			this.broomPosRotationIncrements = 3;
-		}
+        this.broomPosRotationIncrements = i + 5;
 		this.broomX = d;
 		this.broomY = d1;
 		this.broomZ = d2;
@@ -165,7 +151,7 @@ public class EntityBroom extends Entity {
 		this.prevPosZ = this.posZ;
 		//int i = 5;
 		double d1 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-		if (this.worldObj.isRemote && this.isEmpty) {
+		if (this.worldObj.isRemote) {
 			if (this.broomPosRotationIncrements > 0) {
 				double d4 = this.posX + (this.broomX - this.posX) / this.broomPosRotationIncrements;
 				double d10 = this.posY + (this.broomY - this.posY) / this.broomPosRotationIncrements;
@@ -273,11 +259,6 @@ public class EntityBroom extends Entity {
 				}
 			}
 		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void func_70270_d(boolean par1) {
-		this.isEmpty = par1;
 	}
 
 	@Override
