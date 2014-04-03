@@ -16,6 +16,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityBroom extends Entity {
+    public static double rotationFactor = 0.03;
+    public static double maxSpeed = 1.05D;
 	private int broomPosRotationIncrements;
 	private double broomX, broomY, broomZ;
 	private double broomYaw, broomPitch;
@@ -33,6 +35,7 @@ public class EntityBroom extends Entity {
 		this.preventEntitySpawning = true;
 		this.setSize(1.3F, 0.6F);
 		this.yOffset = this.height / 2.0F;
+        this.stepHeight = 1.0F;
 	}
 
 	public EntityBroom(World world, double d, double d1, double d2) {
@@ -177,11 +180,16 @@ public class EntityBroom extends Entity {
 				double d5 = ((EntityLivingBase) this.riddenByEntity).moveStrafing;//>0 for left key, <0 for right key
 				double d0 = -Math.sin(this.riddenByEntity.rotationYaw * (float) Math.PI / 180.0F);
 				double d11 = Math.cos(this.riddenByEntity.rotationYaw * (float) Math.PI / 180.0F);
-				this.motionX += (d5 * d11 + d0 * d4) * 0.08;
-				this.motionZ += (d4 * d11 - d0 * d5) * 0.08;
+				this.motionX += (d5 * d11 + d0 * d4) * rotationFactor;
+				this.motionZ += (d4 * d11 - d0 * d5) * rotationFactor;
 			}
+            double d2 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+            if (d2 > maxSpeed) {
+                this.motionX *= maxSpeed / d2;
+                this.motionZ *= maxSpeed / d2;
+            }
 			if (this.riddenByEntity != null) {
-				double acc = 0.05D;
+				double acc = rotationFactor;
 				//move up if hitting wall
 				if (this.isCollidedHorizontally)
 					this.motionY += acc;
@@ -249,7 +257,7 @@ public class EntityBroom extends Entity {
 				if (list != null && !list.isEmpty()) {
 					for (int j1 = 0; j1 < list.size(); ++j1) {
 						Entity entity = (Entity) list.get(j1);
-						if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityBroom) {
+						if (entity != this.riddenByEntity && entity.canBePushed()) {
 							entity.applyEntityCollision(this);
 						}
 					}
