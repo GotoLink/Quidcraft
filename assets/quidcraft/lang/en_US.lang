@@ -24,6 +24,5 @@ item.quidcraft:Quaffle.name=Quaffle
 item.quidcraft:Snitch.name=Snitch
 item.quidcraft:SnitchGlove.name=Snitch Gloves
 
-key.Up=Up
-key.Down=Down
-key.categories.broom=Broom
+key.fly.up=Fly Up
+key.fly.down=Fly Down
