@@ -1,8 +1,8 @@
-== NoMoreRecipeConflict 0.1 ==
-* Port to Forge
-* Removed all base class edits
-* Added SMP support
-* Added mcmod.info and pack.mcmeta files
-* Changed left/right keys to custom switch key ('add' by default)
+== Quidcraft 0.1 ==
 * Obfuscated "version-independent"
-* Added M.U.D support
+* Ported to Forge
+* Added mcmod.info file
+* Added settings in a config file (mostly item ids)
+* Added items in creative inventory, at new "Quidditch" tab
+* Added control keys for the broom (access them in controls menu)
+* Lot of bug fixes +unstable broom flight + hurtful landing
