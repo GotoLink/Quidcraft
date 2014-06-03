@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderSnitch extends Render {
-	protected ModelSnitch modelSnitch;
+	protected final ModelSnitch modelSnitch;
 	private final static ResourceLocation snitch = new ResourceLocation("quidcraft", "textures/models/SnitchSkin.png");
 
 	public RenderSnitch(ModelSnitch model, float f) {

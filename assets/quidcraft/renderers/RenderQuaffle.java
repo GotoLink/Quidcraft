@@ -35,7 +35,7 @@ public class RenderQuaffle extends Render {
 		renderNew((EntityQuaffle) entity, d, d1, d2, f, f1);
 	}
 
-	protected ModelBase modelQuaffle;
+	protected final ModelBase modelQuaffle;
 	private final static ResourceLocation quaffle = new ResourceLocation("quidcraft", "textures/models/QuaffleSkin.png");
 
 	@Override

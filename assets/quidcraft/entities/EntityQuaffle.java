@@ -127,7 +127,7 @@ public class EntityQuaffle extends Entity {
 					if (motionY != prevVelY && !inNet) {
 						motionY = -prevVelY;
 						collided = true;
-					} else if (!onGround && !inNet) {
+					} else if (!inNet) {
 						motionY -= 0.02;
 					}
 				}

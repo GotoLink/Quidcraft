@@ -48,7 +48,7 @@ public class RenderBroom extends Render {
 		this.renderBroom((EntityBroom) entity, d, d1, d2, f, f1);
 	}
 
-	protected ModelBase modelBroom;
+	protected final ModelBase modelBroom;
 	private final static ResourceLocation broom = new ResourceLocation("quidcraft", "textures/models/BroomSkin.png");
 
 	@Override

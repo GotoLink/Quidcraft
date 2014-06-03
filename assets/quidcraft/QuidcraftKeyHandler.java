@@ -11,7 +11,7 @@ import assets.quidcraft.entities.EntityBroom;
 import org.lwjgl.input.Keyboard;
 
 public class QuidcraftKeyHandler{
-	Minecraft client = Minecraft.getMinecraft();
+	final Minecraft client = Minecraft.getMinecraft();
 	public static final String upDesc = "fly.up";
 	public static final String downDesc = "fly.down";
     public static final String cat = "key.categories.movement";

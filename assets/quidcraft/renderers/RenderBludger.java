@@ -39,7 +39,7 @@ public class RenderBludger extends Render {
 		renderNew((EntityBludger) entity, d, d1, d2, f, f1);
 	}
 
-	protected ModelBase modelBludger;
+	protected final ModelBase modelBludger;
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {

@@ -62,10 +62,7 @@ public class BlockGoal extends Block//Breakable
 
 	public boolean isBlockAt(IBlockAccess iblockaccess, int i, int j, int k) {
 		Block l = iblockaccess.getBlock(i, j, k);
-		if (l != Blocks.air) {
-			return true;
-		}
-		return false;
+		return l != Blocks.air;
 	}
 
 	@Override

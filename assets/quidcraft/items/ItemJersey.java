@@ -1,5 +1,6 @@
 package assets.quidcraft.items;
 
+import assets.quidcraft.QuidcraftCommonProxy;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
@@ -25,6 +26,6 @@ public class ItemJersey extends ItemArmor {
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return "quidcraft:textures/models/jersey" + Quidcraft.proxy.jerseyNames[index] + ".png";
+		return "quidcraft:textures/models/jersey" + QuidcraftCommonProxy.jerseyNames[index] + ".png";
 	}
 }
