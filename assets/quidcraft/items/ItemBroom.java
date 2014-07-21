@@ -26,7 +26,7 @@ public class ItemBroom extends Item {
 		double var7 = entityplayer.prevPosX + (entityplayer.posX - entityplayer.prevPosX);
 		double var9 = entityplayer.prevPosY + (entityplayer.posY - entityplayer.prevPosY) + 1.62D - entityplayer.yOffset;
 		double var11 = entityplayer.prevPosZ + (entityplayer.posZ - entityplayer.prevPosZ);
-		Vec3 var13 = world.getWorldVec3Pool().getVecFromPool(var7, var9, var11);
+		Vec3 var13 = Vec3.createVectorHelper(var7, var9, var11);
 		float var14 = MathHelper.cos(-var6 * 0.017453292F - (float) Math.PI);
 		float var15 = MathHelper.sin(-var6 * 0.017453292F - (float) Math.PI);
 		float var16 = -MathHelper.cos(-var5 * 0.017453292F);
