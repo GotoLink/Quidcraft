@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntitySnitch extends EntityFlying implements IAnimals {
-	private static double speedFactor = 1.0D;
+	public static double speedFactor = 1.0D;
 
 	public EntitySnitch(World world) {
 		super(world);

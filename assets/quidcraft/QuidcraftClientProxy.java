@@ -16,11 +16,13 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import org.lwjgl.input.Keyboard;
 
+import java.io.File;
+
 public class QuidcraftClientProxy extends QuidcraftCommonProxy {
     public static int KEY_UP = Keyboard.KEY_NUMPAD8, KEY_DOWN = Keyboard.KEY_NUMPAD2;
 	@Override
-	public void preInit() {
-        super.preInit();
+	public void preInit(File file) {
+        super.preInit(file);
 		FMLCommonHandler.instance().bus().register(new QuidcraftKeyHandler(KEY_UP, KEY_DOWN));
 	}
 

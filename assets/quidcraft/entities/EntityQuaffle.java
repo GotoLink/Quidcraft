@@ -11,12 +11,15 @@ import net.minecraft.world.World;
 import assets.quidcraft.Quidcraft;
 
 public class EntityQuaffle extends Entity {
+    int ticksInAir;
+    public static double bounceFactor = 0.4D;
+    public static double force = 0.5D;
+    boolean stopped;
 	public EntityQuaffle(World world) {
 		super(world);
 		ticksInAir = 0;
 		setSize(0.5F, 0.5F);
 		yOffset = height / 3.0F;
-		bounceFactor = 0.4;
 		stopped = false;
 	}
 
@@ -27,7 +30,6 @@ public class EntityQuaffle extends Entity {
 		double z = entity.posZ;
 		float yaw = entity.rotationYaw;
 		float pitch = entity.rotationPitch;
-		double force = 0.5;
 		setRotation(yaw, 0);
 		double xHeading = -MathHelper.sin((yaw * 3.141593F) / 180F);
 		double zHeading = MathHelper.cos((yaw * 3.141593F) / 180F);
@@ -182,8 +184,4 @@ public class EntityQuaffle extends Entity {
 	public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
 	}
 
-	int ticksInAir;
-	double bounceFactor;
-	boolean collided;
-	boolean stopped;
 }

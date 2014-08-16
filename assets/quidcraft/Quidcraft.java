@@ -22,7 +22,7 @@ public class Quidcraft {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		proxy.preInit();
+		proxy.preInit(event.getSuggestedConfigurationFile());
         if(event.getSourceFile().getName().endsWith(".jar") && event.getSide().isClient()){
             try {
                 Class.forName("mods.mud.ModUpdateDetector").getDeclaredMethod("registerMod", ModContainer.class, String.class, String.class).invoke(null,

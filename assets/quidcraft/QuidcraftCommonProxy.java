@@ -15,6 +15,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.config.Configuration;
+
+import java.io.File;
 
 public class QuidcraftCommonProxy {
 	public CreativeTabs tabQuidditch;
@@ -28,7 +31,25 @@ public class QuidcraftCommonProxy {
 	public void registerRenderThings() {
 	}
 
-	public void preInit() {
+	public void preInit(File configFile) {
+        Configuration config = new Configuration(configFile);
+        double broomSpeed = config.get("Speed Values", "Broom", EntityBroom.maxSpeed).getDouble();
+        if(broomSpeed>0 && broomSpeed<10){
+            EntityBroom.maxSpeed = broomSpeed;
+        }
+        double bludgerSpeed = config.get("Speed Values", "Bludger", EntityBludger.speedFactor).getDouble();
+        if(bludgerSpeed>0 && bludgerSpeed<10){
+            EntityBludger.speedFactor = bludgerSpeed;
+        }
+        double snitchSpeed = config.get("Speed Values", "Snitch", EntitySnitch.speedFactor).getDouble();
+        if(snitchSpeed>0 && snitchSpeed<10){
+            EntitySnitch.speedFactor = snitchSpeed;
+        }
+        double quaffleSpeed = config.get("Speed Values", "Quaffle", EntityQuaffle.force).getDouble();
+        if(quaffleSpeed>0 && quaffleSpeed<10){
+            EntityQuaffle.force = quaffleSpeed;
+        }
+        config.save();
         tabQuidditch = new QuidcraftCreativeTab("Quidditch");
         /* Entities */
         EntityRegistry.registerModEntity(EntityBludger.class, "QuidditchModBludger", 1, Quidcraft.INSTANCE, 40, 1, true);

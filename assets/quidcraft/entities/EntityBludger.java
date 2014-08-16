@@ -24,7 +24,7 @@ public class EntityBludger extends EntityFlying implements IMob {
 	private double attackerY;
 	private double attackerZ;
 	private int ticksSinceHit;
-	private static double speedFactor = 0.6D;
+	public static double speedFactor = 0.6D;
 
 	public EntityBludger(World world) {
 		super(world);
@@ -161,8 +161,6 @@ public class EntityBludger extends EntityFlying implements IMob {
 	public boolean interact(EntityPlayer entityplayer) {
 		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
 		if (itemstack != null && itemstack.getItem() == Quidcraft.proxy.BludgerGlove && !worldObj.isRemote) {
-			// entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem,
-			// new ItemStack(mod_QuidditchSMP.Bludger));
 			if (entityplayer.inventory.addItemStackToInventory(new ItemStack(Quidcraft.proxy.Bludger, 1))) {
 				entityplayer.onItemPickup(this, 1);
 				setDead();
