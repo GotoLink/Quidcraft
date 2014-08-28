@@ -1,0 +1,29 @@
+
+tile.quidcraft:ScoreAreaFlag.name=Флаг вратарской зоны
+tile.quidcraft:Flag.name=Флаг границ поля
+tile.quidcraft:QuidcraftChest.name=Сундук для квиддича
+tile.quidcraft:BlockGoal.name=Сетка ворот
+
+item.quidcraft:Headband.name=Повязка
+item.quidcraft:HeadbandBeater.name=Повязка загонщика
+item.quidcraft:HeadbandChaser.name=Повязка охотника
+item.quidcraft:HeadbandKeeper.name=Повязка вратаря
+item.quidcraft:HeadbandSeeker.name=Повязка ловца
+item.quidcraft:Jersey.name= Форма
+item.quidcraft:JerseyRed.name=Красная форма
+item.quidcraft:JerseyGreen.name=Зелёная форма
+item.quidcraft:JerseyOrange.name=Оранжевая форма
+item.quidcraft:JerseyBlue.name=Синяя форма
+item.quidcraft:JerseyPurple.name=Фиолетовая форма
+item.quidcraft:JerseyYellow.name=Жёлтая форма
+item.quidcraft:Bat.name=Бита
+item.quidcraft:Bludger.name=Бладжер
+item.quidcraft:BludgerGlove.name=Перчатки загонщика
+item.quidcraft:Broom.name=Метла
+item.quidcraft:Quaffle.name=Квоффл
+item.quidcraft:Snitch.name=Снитч
+item.quidcraft:SnitchGlove.name=Перчатки ловца
+
+key.Up=Подъём
+key.Down=Спуск
+key.categories.broom=Управление метлой
