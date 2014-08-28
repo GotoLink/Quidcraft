@@ -6,3 +6,5 @@
 * Added items in creative inventory, at new "Quidditch" tab
 * Added control keys for the broom (access them in controls menu)
 * Lot of bug fixes +unstable broom flight + hurtful landing
+* Added speed options
+* Added russian

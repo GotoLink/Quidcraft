@@ -1,23 +1,30 @@
 <mod modid="quidcraft">
+    <mcVersion version="1.7.10">
+        <release type="release" version="0.1"
+                 url="http://www.minecraftforum.net/topic/1651891-/#Quidcraft"
+                 download="http://www.mediafire.com/download/7n2h51ix3fkk1bx/Quidcraft-0.1(1.7.10).jar"
+                 md5="BA911A04014CD36A6356BCE8C851138D"
+                />
+    </mcVersion>
     <mcVersion version="1.7.2">
         <release type="release" version="0.1"
                  url="http://www.minecraftforum.net/topic/1651891-/#Quidcraft"
-                 download="http://www.mediafire.com/download/dnedj6pgzvf8yym/NoMoreRecipeConflict-0.1(1.7.2).jar"
+                 download="http://www.mediafire.com/download/4zgyhiwczfkuu8l/Quidcraft-0.1(1.7.2).jar"
                  md5="02B57E1E4BA8B724FA6131A42D583640"
                 />
     </mcVersion>
 	<mcVersion version="1.6.4">
         <release type="release" version="0.1"
                  url="http://www.minecraftforum.net/topic/1651891-/#Quidcraft"
-                 download="http://www.mediafire.com/download/jamqlthdmkpx4mm/NoMoreRecipeConflict_1.6.X.zip"
-                 md5="A9758CFC35B0A610CB79E7CFBC69858D"
+                 download="http://www.mediafire.com/download/zhug4qq4amtqqa5/Quidcraft_0.1(1.6.X).zip"
+                 md5="560616DB07C6EAF93056CD18AAD459D0"
                 />
     </mcVersion>
 	<mcVersion version="1.5.2">
         <release type="release" version="0.1"
                  url="http://www.minecraftforum.net/topic/1651891-/#Quidcraft"
-                 download="http://www.mediafire.com/download/s0ecn8z866aurin/NoMoreRecipeConflict_1.5.X.zip"
-                 md5="50CE517BDEA17B78875630B939C78B46"
+                 download="http://www.mediafire.com/download/53camfp1vewudg4/Quidcraft_0.1(1.5.X).zip"
+                 md5="0E0ED715F6B51946B71CBB7FB0999D79"
                 />
     </mcVersion>
 </mod>
