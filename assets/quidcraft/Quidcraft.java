@@ -6,7 +6,9 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameData;
 
 @Mod(modid = "quidcraft", name = "Quidcraft", useMetadata = true)
 public class Quidcraft {
@@ -34,4 +36,18 @@ public class Quidcraft {
             }
         }
 	}
+
+    @EventHandler
+    public void remap(FMLMissingMappingsEvent event){
+        for(FMLMissingMappingsEvent.MissingMapping missingMapping:event.get()){
+            switch(missingMapping.type){
+                case ITEM:
+                    missingMapping.remap(GameData.getItemRegistry().getObject(missingMapping.name.replace(" ", "")));
+                    break;
+                case BLOCK:
+                    missingMapping.remap(GameData.getBlockRegistry().getObject(missingMapping.name.replace(" ", "")));
+                    break;
+            }
+        }
+    }
 }

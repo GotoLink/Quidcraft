@@ -66,7 +66,7 @@ public class QuidcraftCommonProxy {
         GameRegistry.addRecipe(new ItemStack(Bludger), " i ", "ibi", " i ",'i', Items.iron_ingot,'b', Items.bone);
 		/* Bludger Glove */
         BludgerGlove = new ItemBludgerGlove().setUnlocalizedName("quidcraft:BludgerGlove").setMaxStackSize(1).setTextureName("quidcraft:BludgerGlove");
-        GameRegistry.registerItem(BludgerGlove, "Bludger Gloves");
+        GameRegistry.registerItem(BludgerGlove, "BludgerGloves");
         GameRegistry.addRecipe(new ItemStack(BludgerGlove), "i i",'i', Items.iron_ingot);
 		/* Broom */
         Broom = new ItemBroom().setUnlocalizedName("quidcraft:Broom").setMaxStackSize(1).setTextureName("quidcraft:Broom").setCreativeTab(tabQuidditch);
@@ -82,12 +82,12 @@ public class QuidcraftCommonProxy {
         GameRegistry.addRecipe(new ItemStack(Snitch, 1), "fgf",'g', Items.gold_ingot,'f', Items.feather);
 		/* Snitch Glove */
         SnitchGlove = new ItemSnitchGlove().setUnlocalizedName("quidcraft:SnitchGlove").setMaxStackSize(1).setTextureName("quidcraft:SnitchGlove").setCreativeTab(tabQuidditch);
-        GameRegistry.registerItem(SnitchGlove, "Snitch Gloves");
+        GameRegistry.registerItem(SnitchGlove, "SnitchGloves");
         GameRegistry.addRecipe(new ItemStack(SnitchGlove), "l l",'l', Items.leather);
 		/* Jerseys */
         for (int i = 0; i < jerseyNames.length; i++) {
             Jersey[i] = new ItemJersey(i).setUnlocalizedName("quidcraft:Jersey" + jerseyNames[i]).setTextureName("quidcraft:Jersey" + jerseyNames[i]).setCreativeTab(tabQuidditch);
-            GameRegistry.registerItem(Jersey[i], jerseyNames[i] + " Jersey");
+            GameRegistry.registerItem(Jersey[i], jerseyNames[i] + "Jersey");
             for (int j = 0; j < jerseyNames.length && j != i; j++) {
                 GameRegistry.addShapelessRecipe(new ItemStack(Jersey[i]), new ItemStack(Jersey[j]), new ItemStack(Items.dye, 1, i));
             }
@@ -96,7 +96,7 @@ public class QuidcraftCommonProxy {
 		/* Headbands */
         for (int i = 0; i < headbandNames.length; i++) {
             Headband[i] = new ItemHeadband(i).setUnlocalizedName("quidcraft:Headband" + headbandNames[i]).setTextureName("quidcraft:Headband" + headbandNames[i]).setCreativeTab(tabQuidditch);
-            GameRegistry.registerItem(Headband[i], headbandNames[i] + " Headband");
+            GameRegistry.registerItem(Headband[i], headbandNames[i] + "Headband");
             for (int j = 0; j < headbandNames.length && j != i; j++) {
                 GameRegistry.addShapelessRecipe(new ItemStack(Headband[i]), new ItemStack(Headband[j]), new ItemStack(Items.dye, 1, i));
             }
@@ -104,21 +104,21 @@ public class QuidcraftCommonProxy {
         GameRegistry.addRecipe(new ItemStack(Headband[0]), "ccc",'c', Blocks.wool);
 		/* Goal Block */
         BlockGoal = new BlockGoal().setHardness(2.5F).setStepSound(Block.soundTypeCloth).setBlockName("quidcraft:BlockGoal").setCreativeTab(tabQuidditch);
-        GameRegistry.registerBlock(BlockGoal, "Net Block");
+        GameRegistry.registerBlock(BlockGoal, "NetBlock");
         GameRegistry.addRecipe(new ItemStack(BlockGoal, 5), "c c", " c ", "c c",'c', Blocks.wool);
         GameRegistry.registerTileEntity(TileEntityGoal.class, "GoalTile");
 		/* Quidditch Chest */
         QuidditchChest = new BlockQuidditchChest().setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("quidcraft:QuidcraftChest").setCreativeTab(tabQuidditch);
-        GameRegistry.registerBlock(QuidditchChest, "Quidditch Chest");
+        GameRegistry.registerBlock(QuidditchChest, "QuidditchChest");
         GameRegistry.addRecipe(new ItemStack(QuidditchChest), " q ", "bcb", " s ",'q', Quaffle,'b', Bludger,'s', Snitch,
                'c', Blocks.chest);
 		/* Boundary Flag */
         BoundaryFlag = new BlockFlag().setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("quidcraft:Flag").setBlockTextureName("quidcraft:Flag").setCreativeTab(tabQuidditch);
-        GameRegistry.registerBlock(BoundaryFlag, "Boundary Flag");
+        GameRegistry.registerBlock(BoundaryFlag, "BoundaryFlag");
         GameRegistry.addRecipe(new ItemStack(BoundaryFlag), "wws", "wws", "  s",'w', Blocks.wool,'s', Items.stick);
 		/* Score Area Flag */
         ScoreAreaFlag = new BlockFlag().setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("quidcraft:ScoreAreaFlag").setBlockTextureName("quidcraft:ScoreAreaFlag").setCreativeTab(tabQuidditch);
-        GameRegistry.registerBlock(ScoreAreaFlag, "Score Area Flag");
+        GameRegistry.registerBlock(ScoreAreaFlag, "ScoreAreaFlag");
         GameRegistry.addShapelessRecipe(new ItemStack(ScoreAreaFlag), BoundaryFlag, new ItemStack(Items.dye, 1, 1));
         GameRegistry.addShapelessRecipe(new ItemStack(BoundaryFlag), ScoreAreaFlag, new ItemStack(Items.dye, 1, 15));
         channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(QuidcraftPacketHandler.CHANNEL);
