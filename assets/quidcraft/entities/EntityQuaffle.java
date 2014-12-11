@@ -1,5 +1,6 @@
 package assets.quidcraft.entities;
 
+import assets.quidcraft.Quidcraft;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -8,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import assets.quidcraft.Quidcraft;
 
 public class EntityQuaffle extends Entity {
     int ticksInAir;

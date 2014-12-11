@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelBroom extends ModelBase {
+public final class ModelBroom extends ModelBase {
 	//fields
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;

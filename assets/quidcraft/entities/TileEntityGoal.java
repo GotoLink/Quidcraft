@@ -1,8 +1,8 @@
 package assets.quidcraft.entities;
 
+import assets.quidcraft.blocks.BlockGoal;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import assets.quidcraft.blocks.BlockGoal;
 
 public class TileEntityGoal extends TileEntity {
 	public TileEntityGoal() {

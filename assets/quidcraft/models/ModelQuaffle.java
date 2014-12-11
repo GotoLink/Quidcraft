@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelQuaffle extends ModelBase {
+public final class ModelQuaffle extends ModelBase {
 	// fields
 	ModelRenderer Shape1;
 

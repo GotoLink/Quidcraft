@@ -1,23 +1,23 @@
 package assets.quidcraft.renderers;
 
+import assets.quidcraft.entities.EntityBroom;
+import assets.quidcraft.models.ModelBroom;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
-import assets.quidcraft.entities.EntityBroom;
-import assets.quidcraft.models.ModelBroom;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 @SideOnly(Side.CLIENT)
-public class RenderBroom extends Render {
-	public RenderBroom(ModelBroom model, float f) {
-		this.shadowSize = f;
-		this.modelBroom = model;
+public final class RenderBroom extends Render {
+    private final static ResourceLocation broom = new ResourceLocation("quidcraft", "textures/models/BroomSkin.png");
+    protected final ModelBase modelBroom;
+	public RenderBroom() {
+		this.shadowSize = 0.2F;
+		this.modelBroom = new ModelBroom();
 	}
 
 	public void renderBroom(EntityBroom entitybroom, double d, double d1, double d2, float f, float f1) {
@@ -47,9 +47,6 @@ public class RenderBroom extends Render {
 	public void doRender(Entity entity, double d, double d1, double d2, float f, float f1) {
 		this.renderBroom((EntityBroom) entity, d, d1, d2, f, f1);
 	}
-
-	protected final ModelBase modelBroom;
-	private final static ResourceLocation broom = new ResourceLocation("quidcraft", "textures/models/BroomSkin.png");
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {

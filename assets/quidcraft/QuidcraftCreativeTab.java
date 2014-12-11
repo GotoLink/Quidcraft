@@ -1,11 +1,11 @@
 package assets.quidcraft;
 
-import net.minecraft.creativetab.CreativeTabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class QuidcraftCreativeTab extends CreativeTabs {
+public final class QuidcraftCreativeTab extends CreativeTabs {
 	public QuidcraftCreativeTab(String label) {
 		super(label);
 	}

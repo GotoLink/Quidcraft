@@ -1,24 +1,22 @@
 package assets.quidcraft.renderers;
 
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import assets.quidcraft.entities.EntitySnitch;
 import assets.quidcraft.models.ModelSnitch;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderSnitch extends Render {
+public final class RenderSnitch extends Render {
 	protected final ModelSnitch modelSnitch;
 	private final static ResourceLocation snitch = new ResourceLocation("quidcraft", "textures/models/SnitchSkin.png");
 
-	public RenderSnitch(ModelSnitch model, float f) {
-		this.shadowSize = f;
-		this.modelSnitch = model;
+	public RenderSnitch() {
+		this.shadowSize = 0.2F;
+		this.modelSnitch = new ModelSnitch();
 	}
 
 	public void renderNew(EntitySnitch entitysnitch, double d, double d1, double d2, float f, float f1) {

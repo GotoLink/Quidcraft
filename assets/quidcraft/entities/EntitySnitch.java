@@ -1,5 +1,8 @@
 package assets.quidcraft.entities;
 
+import assets.quidcraft.Quidcraft;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
@@ -11,9 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import assets.quidcraft.Quidcraft;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntitySnitch extends EntityFlying implements IAnimals {
 	public static double speedFactor = 1.0D;

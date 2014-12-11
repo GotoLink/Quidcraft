@@ -1,24 +1,23 @@
 package assets.quidcraft.renderers;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import assets.quidcraft.entities.EntityBludger;
 import assets.quidcraft.models.ModelBludger;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderBludger extends Render {
+public final class RenderBludger extends Render {
 	public static final ResourceLocation bludger = new ResourceLocation("quidcraft", "textures/models/BludgerSkin.png");
 
-	public RenderBludger(ModelBludger model, float f) {
-		this.shadowSize = f;
-		this.modelBludger = model;
+    protected final ModelBase modelBludger;
+	public RenderBludger() {
+		this.shadowSize = 0.2F;
+		this.modelBludger = new ModelBludger();
 	}
 
 	public void renderNew(EntityBludger entitybludger, double d, double d1, double d2, float f, float f1) {
@@ -39,7 +38,6 @@ public class RenderBludger extends Render {
 		renderNew((EntityBludger) entity, d, d1, d2, f, f1);
 	}
 
-	protected final ModelBase modelBludger;
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {

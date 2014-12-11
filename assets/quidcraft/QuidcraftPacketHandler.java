@@ -1,5 +1,6 @@
 package assets.quidcraft;
 
+import assets.quidcraft.entities.EntityBroom;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
@@ -9,7 +10,6 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.NetHandlerPlayServer;
-import assets.quidcraft.entities.EntityBroom;
 
 public class QuidcraftPacketHandler {
 	public static final String CHANNEL = "Quidcraft:Broom";

@@ -1,10 +1,10 @@
 package assets.quidcraft.items;
 
+import assets.quidcraft.entities.EntityQuaffle;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import assets.quidcraft.entities.EntityQuaffle;
 
 public class ItemQuaffle extends Item {
 	public ItemQuaffle() {

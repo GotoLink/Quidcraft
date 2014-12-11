@@ -1,7 +1,6 @@
 package assets.quidcraft.items;
 
-import java.util.List;
-
+import assets.quidcraft.entities.EntityBroom;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -12,7 +11,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import assets.quidcraft.entities.EntityBroom;
+
+import java.util.List;
 
 public class ItemBroom extends Item {
 	public ItemBroom() {

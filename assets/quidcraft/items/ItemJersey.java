@@ -1,12 +1,12 @@
 package assets.quidcraft.items;
 
+import assets.quidcraft.Quidcraft;
 import assets.quidcraft.QuidcraftCommonProxy;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import assets.quidcraft.Quidcraft;
 
 public class ItemJersey extends ItemArmor {
     public final int index;
